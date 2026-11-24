@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#123a32"><title>دفتر ديون الماركت</title>
+<style>
+:root{--bg:#f3f6f5;--card:#fff;--ink:#182b27;--muted:#6c7b76;--green:#176b50;--green2:#e6f3ed;--red:#b73535;--line:#e3eae6;--shadow:0 5px 20px #163d2d0b}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#edf8f3 0%,#f2f5ff 45%,#fff5ee 100%);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}header{background:linear-gradient(120deg,#123a32,#176b50 55%,#258b72);color:white;padding:22px 16px 25px}header .wrap{max-width:1050px;margin:auto}h1{margin:0;font-size:23px}header p{margin:6px 0 0;color:#cfe3db;font-size:14px}.wrap{max-width:1050px;margin:auto;padding:16px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:-12px}.stat{background:var(--card);border-radius:16px;padding:15px;box-shadow:var(--shadow)}.stat small{color:var(--muted);display:block}.stat strong{font-size:22px;display:block;margin-top:6px}.stat-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.privacy-toggle{border:0;background:#edf3f0;color:#176b50;border-radius:9px;padding:5px 8px;cursor:pointer;font-size:18px;line-height:1}.privacy-toggle:focus{outline:2px solid #b9ddcb}.panel{background:var(--card);border-radius:16px;padding:16px;margin-top:15px;box-shadow:var(--shadow);border:1px solid #e5eeea}.panel h2{font-size:18px;margin:0 0 13px}.toolbar{display:flex;gap:9px;flex-wrap:wrap}.input,select,textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;font:inherit;background:white;color:var(--ink);}.input:focus,select:focus,textarea:focus{outline:2px solid #b9ddcb}.toolbar .input{flex:1;min-width:170px}.btn{border:0;border-radius:11px;padding:11px 15px;font:inherit;font-weight:650;cursor:pointer;background:var(--green);color:white}.btn.secondary{background:#edf3f0;color:var(--ink)}.btn.red{background:#faeaea;color:var(--red)}.btn.small{padding:7px 10px;font-size:13px}.btn:active{transform:scale(.98)}.customer{border:1px solid #dbe9e4;border-radius:16px;margin-top:11px;padding:14px;background:linear-gradient(135deg,#ffffff,#f1faf6);box-shadow:0 3px 12px #1b60400c}.customer-name-only{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #dbe9e4;border-radius:14px;margin-top:9px;padding:15px 16px;background:linear-gradient(135deg,#ffffff,#f1faf6);box-shadow:0 3px 12px #1b60400c}.customer-name-only .name-link{font-size:18px}.customer-name-only .open-arrow{color:#176b50;font-size:20px}.customer-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.customer-name{font-weight:750;font-size:17px}.balance{font-weight:800;color:var(--red);font-size:18px}.name-link{border:0;background:transparent;padding:0;color:#176b50;font:inherit;font-weight:800;cursor:pointer;text-align:right}.customer-page{display:none}.customer-page.open{display:block}.page-head{background:linear-gradient(135deg,#176b50,#24936b);color:white;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 7px 20px #176b5020}.page-head .back-btn{border:1px solid #ffffff55;background:#ffffff18;color:white;border-radius:10px;padding:8px 12px;font:inherit;cursor:pointer}.page-customer-name{font-size:23px;font-weight:850;margin:16px 0 4px}.page-balance{font-size:34px;font-weight:900;margin:5px 0}.page-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0}.page-summary .summary-tile{border-radius:14px;padding:13px;background:#e9f6ef;border:1px solid #cde8d8}.page-summary .summary-tile.payment-tile{background:#eaf2ff;border-color:#d4e2ff}.page-summary strong{display:block;font-size:18px;margin-top:5px}.page-transactions{display:grid;gap:10px}.page-tx{border-radius:14px;padding:13px 14px;border:1px solid transparent;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.page-tx.charge-tx{background:linear-gradient(120deg,#fff0f0,#fffafa);border-color:#f4d6d6}.page-tx.payment-tx{background:linear-gradient(120deg,#eef6ff,#f8fbff);border-color:#d9e8ff}.page-tx .tx-value{font-size:18px;font-weight:850;white-space:nowrap}.page-tx .tx-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.page-tx .tx-tools button{border:0;border-radius:8px;padding:6px 9px;background:#ffffffb8;color:#243b34;font:inherit;font-size:12px;cursor:pointer}.balance.zero{color:var(--green)}.meta{font-size:13px;color:var(--muted);margin-top:3px}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.detail{display:none;margin-top:13px;border-top:1px solid var(--line);padding-top:12px}.detail.open{display:block}.transaction{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);padding:10px 0}.transaction:last-child{border-bottom:0}.txdesc{font-size:14px}.txdate{font-size:12px;color:var(--muted)}.charge{color:var(--red);font-weight:700}.payment{color:var(--green);font-weight:700}.empty{text-align:center;color:var(--muted);padding:25px 10px}.modal-bg{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;padding:14px;z-index:4000}.modal-bg.show{display:flex}.modal{background:white;border-radius:17px;width:min(100%,480px);padding:18px;max-height:90vh;overflow:auto}.modal h3{margin:0 0 14px}.field{margin:10px 0}.field label{display:block;font-size:13px;color:var(--muted);margin-bottom:5px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px;font:inherit}.field textarea{resize:vertical}.modal-actions{display:flex;gap:8px;margin-top:15px}.modal-actions button{flex:1}.footnote{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}.hidden{display:none!important}@media(max-width:600px){.stats{grid-template-columns:1fr}.stat{padding:12px}.stat strong{font-size:20px}.wrap{padding:12px}.customer-top{align-items:flex-start}}
+
+.brand-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.market-brand{font-size:clamp(30px,7vw,44px);font-weight:950;letter-spacing:.4px;background:linear-gradient(90deg,#ffe36a,#fff5c4,#ffd43b);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 2px 16px #ffda5a66;line-height:1.3}.market-brand.brand-hidden{display:none}.brand-visibility{border:1px solid #ffe36a88;background:#ffe36a22;color:#ffe36a;border-radius:10px;padding:7px 10px;font-size:20px;font-weight:900;cursor:pointer;min-width:42px}.brand-edit{border:1px solid #ffffff66;background:#ffffff18;color:#fff;border-radius:10px;padding:8px 11px;font:inherit;cursor:pointer}.clock-row{display:flex;align-items:center;gap:9px;margin-top:8px;color:#e3fff3;font-size:15px}.clock-row strong{font-variant-numeric:tabular-nums;letter-spacing:1px}.clock-row #liveDate{font-size:12px;color:#c7e8dc}@keyframes brandShine{0%{background-position:0% 50%}100%{background-position:250% 50%}}
+
+/* Splash screen */
+#splashScreen{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(circle at 50% 25%,#2a8b69 0%,#14533f 40%,#092d24 100%);overflow:hidden;transition:opacity .55s ease,visibility .55s ease}
+#splashScreen.hide{opacity:0;visibility:hidden;pointer-events:none}
+#splashScreen:before,#splashScreen:after{content:'✦';position:absolute;color:#ffe77a;opacity:.6;animation:splashSpark 2.1s ease-in-out infinite}
+#splashScreen:before{top:15%;left:15%;font-size:28px}#splashScreen:after{right:13%;bottom:20%;font-size:36px;animation-delay:.7s}
+.splash-card{width:min(440px,100%);text-align:center;border:1px solid #f8db7766;border-radius:30px;padding:32px 24px;background:linear-gradient(150deg,#ffffff16,#ffffff08);box-shadow:0 20px 60px #0003;backdrop-filter:blur(6px);animation:splashRise .75s ease-out}
+.splash-icon{width:112px;height:112px;margin:0 auto 16px;border-radius:28px;display:grid;place-items:center;background:linear-gradient(145deg,#f9df70,#e5a92b);box-shadow:0 10px 26px #0003,inset 0 2px 5px #fff9; font-size:58px}
+.splash-title{font-size:clamp(27px,7vw,38px);font-weight:950;line-height:1.35;background:linear-gradient(90deg,#fff,#ffe58a,#fff,#e6c451);background-size:240% auto;color:transparent;background-clip:text;-webkit-background-clip:text;text-shadow:0 2px 22px #ffd75b55;animation:splashShine 2.4s linear infinite}
+.splash-sub{color:#d8f1e6;margin-top:10px;font-weight:700;letter-spacing:.5px}.splash-clock{margin:18px auto 0;color:#fff;font-size:20px;font-weight:800;direction:ltr}.splash-date{color:#c8e6d9;font-size:13px;margin-top:4px}.splash-tip{color:#f7dfa0;font-size:12px;margin-top:24px}
+@keyframes splashShine{to{background-position:240% center}}@keyframes splashSpark{0%,100%{transform:scale(.7) rotate(0);opacity:.25}50%{transform:scale(1.25) rotate(35deg);opacity:1}}@keyframes splashRise{from{transform:translateY(22px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media(prefers-reduced-motion:reduce){.splash-title,.splash-icon,#splashScreen:before,#splashScreen:after,.splash-card{animation:none}}
+
+
+/* Market cashbook - premium emerald / teal / amber palette */
+:root{--gold:#d69b25;--blue:#2867a8;--purple:#7653a6;--soft-gold:#fff7e5;--soft-blue:#edf5ff;--soft-purple:#f4effb}
+.app-nav{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0 4px}
+.nav-btn{border:1px solid #d7e8e0;background:#fff;color:#31584b;border-radius:13px;padding:11px 16px;font:inherit;font-weight:800;cursor:pointer;box-shadow:0 3px 10px #173e2e0a}
+.nav-btn.active{background:linear-gradient(120deg,#123a32,#218267);color:#fff;border-color:transparent;box-shadow:0 6px 16px #176b5030}
+.inventory-item{border:1px solid #dcebe4;border-radius:15px;padding:13px;margin-top:10px;background:linear-gradient(135deg,#fff,#f3faf6)}
+.inventory-item-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.inventory-item-name{font-size:17px;font-weight:850;color:#176b50}.inventory-item-meta{font-size:12px;color:#6c7b76;margin-top:3px}
+.inventory-item-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:11px}
+.inventory-item-stats div{background:#edf6f1;border-radius:10px;padding:8px;font-size:12px}.inventory-item-stats strong{display:block;font-size:15px;margin-top:3px}
+.inventory-item-tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.inventory-item-tools button{border:0;border-radius:8px;padding:7px 9px;background:#eaf2ee;color:#24483a;font:inherit;font-size:12px;cursor:pointer}
+.stock-badge{border-radius:20px;padding:5px 9px;font-size:12px;font-weight:800;background:#e6f5eb;color:#176b50}.stock-badge.low{background:#fff3d8;color:#94620b}.stock-badge.out{background:#fde8e8;color:#b73535}
+@media(max-width:520px){.inventory-item-stats{grid-template-columns:repeat(2,1fr)}}
+body.dark-mode .inventory-item{background:#1d3029;border-color:#385448}body.dark-mode .inventory-item-name{color:#8fe0b6}body.dark-mode .inventory-item-stats div{background:#263d34;color:#e5f2eb}body.dark-mode .inventory-item-tools button{background:#30483e;color:#e5f2eb}
+.market-page{display:none}
+.market-hero{border-radius:20px;padding:20px;color:#fff;background:radial-gradient(circle at 90% 0%,#49a98a55,transparent 36%),linear-gradient(125deg,#103a32,#176b50 58%,#267e78);box-shadow:0 12px 28px #123a3225;margin-top:15px}
+.market-hero h2{margin:0;font-size:22px}.market-hero p{margin:7px 0 0;color:#d4eee4;font-size:13px}
+.cash-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:14px 0}
+.cash-stat{background:#fff;border:1px solid #e4eee9;border-radius:17px;padding:15px;box-shadow:var(--shadow);min-width:0}
+.cash-stat small{display:block;color:var(--muted);font-weight:700}.cash-stat strong{display:block;font-size:clamp(18px,4vw,25px);margin-top:7px;font-weight:900;overflow-wrap:anywhere}
+.cash-stat.income strong{color:#16805d}.cash-stat.expense strong{color:#c34b43}.cash-stat.net strong{color:#2867a8}
+.market-actions{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}
+.market-actions .btn.expense-btn{background:linear-gradient(120deg,#b94a43,#d56a54)}
+.market-actions .btn.income-btn{background:linear-gradient(120deg,#147354,#269a70)}
+.market-actions .btn.debt-btn{background:linear-gradient(120deg,#2867a8,#4589c7)}
+.market-filters{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:9px;margin:10px 0}
+.market-filters .input{min-width:0}
+.market-entry{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:14px;border:1px solid #e5eee9;border-radius:15px;margin-top:9px;background:linear-gradient(135deg,#fff,#fbfdfc)}
+.market-entry .entry-main{min-width:0}.market-entry .entry-title{font-weight:850}.market-entry .entry-meta{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.7}
+.market-entry .entry-amount{font-size:17px;font-weight:900;white-space:nowrap}
+.market-entry.income{border-right:4px solid #23956d}.market-entry.expense{border-right:4px solid #d35b51}
+.market-entry.income .entry-amount{color:#16805d}.market-entry.expense .entry-amount{color:#c34b43}
+.entry-tools{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.entry-tools button{border:0;border-radius:8px;padding:6px 9px;background:#edf3f0;color:#29483d;font:inherit;font-size:12px;cursor:pointer}
+.market-section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.market-section-title h3{margin:0;font-size:17px}
+.market-report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.market-report-tile{border-radius:14px;padding:13px;background:#f3f8f5;border:1px solid #e1ece6}
+.market-report-tile small{color:var(--muted)}.market-report-tile strong{display:block;margin-top:5px;font-size:18px}
+.category-pill{display:inline-block;border-radius:20px;padding:3px 9px;font-size:11px;font-weight:800;background:#eef4f1;color:#45675a}
+.market-modal-note{background:#fff8e9;border:1px solid #f1dfb7;color:#76591f;padding:10px;border-radius:11px;font-size:12px;line-height:1.7;margin-top:10px}
+@media(max-width:650px){.cash-stats{grid-template-columns:1fr}.cash-stat{padding:12px}.market-filters{grid-template-columns:1fr 1fr}.market-filters #marketSearch{grid-column:1/-1}.market-entry{padding:12px}.nav-btn{flex:1}.market-report-grid{grid-template-columns:1fr}}
+
+
+/* Requested navigation, theme and guide additions */
+.brand-row{width:100%;min-width:0;flex:1 1 100%!important;align-items:center}.market-brand{display:block;width:100%;min-width:0;flex:1 1 100%;overflow-wrap:anywhere;word-break:break-word;font-size:clamp(30px,8vw,54px)!important;color:#fff;background:linear-gradient(90deg,#fff36a,#ff8bd7,#78e8ff,#9cff9c,#fff36a);background-size:300% 100%;filter:drop-shadow(0 0 8px #ffe66d88);text-shadow:0 0 18px #ffffff55!important;line-height:1.3}@supports (-webkit-background-clip:text){.market-brand{color:transparent;-webkit-text-fill-color:transparent;-webkit-background-clip:text;background-clip:text;animation:brandShine 3.2s linear infinite!important}}
+@keyframes brandShine{to{background-position:300% 50%}}
+.header-tools{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.menu-open,.theme-toggle{border:1px solid #ffffff66;background:#ffffff20;color:#fff;border-radius:12px;padding:10px 13px;font:inherit;font-weight:800;cursor:pointer}
+.menu-open{font-size:17px}
+.side-shade{position:fixed;inset:0;background:#071b16a8;z-index:1100;opacity:0;visibility:hidden;transition:.2s}
+.side-shade.open{opacity:1;visibility:visible}
+.side-menu{position:fixed;z-index:1101;right:0;top:0;height:100dvh;width:min(84vw,330px);padding:20px 16px;background:linear-gradient(160deg,#123a32,#176b50 70%,#0c3028);color:#fff;box-shadow:-12px 0 35px #0003;transform:translateX(105%);transition:transform .25s ease;overflow:auto}
+.side-menu.open{transform:translateX(0)}
+.side-menu-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;font-size:20px;font-weight:900}
+.side-menu button.menu-item{width:100%;display:flex;align-items:center;gap:12px;text-align:right;border:1px solid #ffffff26;background:#ffffff12;color:#fff;border-radius:13px;padding:13px 12px;margin:8px 0;font:inherit;font-weight:750;cursor:pointer}
+.side-menu button.menu-item:active{background:#ffffff2b}
+.side-menu .menu-close{border:0;background:#ffffff20;color:white;border-radius:9px;padding:7px 11px;font-size:20px}
+#guidePanel{display:none;line-height:1.85}
+.guide-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:11px 0}
+.guide-card h3{margin:0 0 7px;color:var(--green)}
+body.dark-mode{--bg:#101a18;--card:#1b2925;--ink:#edf7f2;--muted:#a9bbb3;--line:#344840;--green2:#203d32;--soft-gold:#3c3320;--soft-blue:#1e3041;--soft-purple:#30263e;background:linear-gradient(145deg,#101a18,#172522 55%,#1b202b);color:var(--ink)}
+body.dark-mode .panel,body.dark-mode .stat,body.dark-mode .customer-name-only,body.dark-mode .customer{background:#1b2925;border-color:#344840;color:var(--ink)}
+body.dark-mode .input,body.dark-mode select,body.dark-mode textarea,body.dark-mode .field input,body.dark-mode .field textarea,body.dark-mode .field select{background:#12201b;color:#edf7f2;border-color:#40564c}
+body.dark-mode .nav-btn,body.dark-mode .btn.secondary{background:#293c34;color:#edf7f2;border-color:#40564c}
+body.dark-mode .page-summary .summary-tile{background:#203d32;border-color:#345c49}
+body.dark-mode .page-summary .summary-tile.payment-tile{background:#1e3041;border-color:#34516b}
+body.dark-mode .page-tx.charge-tx{background:#3b2525;border-color:#634040}
+body.dark-mode .page-tx.payment-tx{background:#1e3041;border-color:#34516b}
+body.dark-mode .market-report-tile{background:#202f2a;border-color:#40564c}
+body.dark-mode .customer-name-only .name-link,body.dark-mode .name-link{color:#8fe0bd}
+body.dark-mode .modal{background:#1b2925;color:#edf7f2}
+body.dark-mode .page-tx .tx-tools button{background:#293c34;color:#edf7f2}
+@media(prefers-reduced-motion:reduce){.market-brand{animation:none!important}}
+
+
+.brand-edit-modal{position:fixed;inset:0;z-index:4500;background:#0008;display:none;align-items:center;justify-content:center;padding:16px}.brand-edit-modal.show{display:flex}.brand-edit-card{width:min(440px,100%);background:#fff;color:#18372d;border-radius:18px;padding:20px;box-shadow:0 18px 55px #0004}.brand-edit-card h3{margin:0 0 12px}.brand-edit-card input{width:100%;padding:13px;border:1px solid #ccdcd3;border-radius:11px;font:inherit}.brand-edit-actions{display:flex;gap:8px;margin-top:13px}.brand-edit-actions button{flex:1}.reports-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.reports-hide{border:0;border-radius:9px;background:#faeaea;color:#b73535;font-size:22px;font-weight:900;padding:3px 11px;cursor:pointer}#showReportsBtn{display:none}.reports-hidden #showReportsBtn{display:inline-flex}
+/* App access lock */
+#securityScreen{position:fixed;inset:0;z-index:5000;display:none;align-items:center;justify-content:center;padding:18px;background:radial-gradient(circle at 50% 15%,#277e61,#123a32 55%,#071f1a);color:#fff}
+#securityScreen.show{display:flex}
+.security-card{width:min(440px,100%);padding:26px 22px;border:1px solid #ffffff30;border-radius:24px;background:#ffffff12;box-shadow:0 22px 70px #0005;backdrop-filter:blur(10px);text-align:center}
+.security-logo{font-size:48px;margin-bottom:8px}.security-card h2{margin:4px 0 8px;font-size:25px}.security-card p{color:#d6eee4;line-height:1.7;font-size:14px}
+.security-card input,.security-card select{width:100%;padding:15px 13px;margin:7px 0;border:1px solid #ffffff55;border-radius:12px;background:#fff;color:#18372d;font:inherit;font-size:18px;text-align:center;outline:none}
+.security-card input.pin-input{letter-spacing:9px;font-weight:900}.security-actions{display:grid;gap:9px;margin-top:12px}.security-actions button{border:0;border-radius:12px;padding:13px;font:inherit;font-weight:850;cursor:pointer;background:linear-gradient(120deg,#ffe58a,#e7b83f);color:#26351e}.security-actions button.secondary{background:#ffffff20;color:#fff;border:1px solid #ffffff55}
+#lockError{min-height:22px;color:#ffd2d2;font-size:13px;margin-top:8px}.security-foot{font-size:11px!important;color:#c4ded3!important;margin-top:14px}
+
+
+/* Customer dedicated screen and requested amount privacy controls */
+#customerPage.customer-page.open{display:block!important;position:fixed;inset:0;z-index:3000;overflow:auto;background:var(--bg);padding:14px max(14px,calc((100vw - 760px)/2));}
+.customer-amount-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.amount-eye{border:0;border-radius:8px;background:#ffffffb8;color:#176b50;padding:5px 9px;font-size:17px;cursor:pointer}
+.market-brand{font-size:clamp(38px,10vw,76px)!important;background:linear-gradient(90deg,#fff36a,#ff8bd7,#78e8ff,#9cff9c,#fff36a)!important;background-size:300% 100%!important;animation:brandShine 2.5s linear infinite!important;filter:drop-shadow(0 0 10px #ffe66d99)}
+@media(prefers-reduced-motion:reduce){.market-brand{animation:none!important}}
+
+/* Ensure the supermarket name is always visible in the main header */
+#marketBrand,.market-brand,.market-brand.brand-hidden{display:block!important;visibility:visible!important;opacity:1!important;}
+.brand-row{display:flex!important;visibility:visible!important;}
+
+/* Extra-bright, large, flashing supermarket title */
+@keyframes marketBrandFlash {
+  0%,100% { background-position:0% 50%; filter:drop-shadow(0 0 8px #fff700) drop-shadow(0 0 18px #ff00c8); transform:scale(1); }
+  25% { background-position:50% 50%; filter:drop-shadow(0 0 14px #00f7ff) drop-shadow(0 0 28px #00f7ff); transform:scale(1.025); }
+  50% { background-position:100% 50%; filter:drop-shadow(0 0 16px #a6ff00) drop-shadow(0 0 30px #a6ff00); transform:scale(1.04); }
+  75% { background-position:150% 50%; filter:drop-shadow(0 0 15px #ff4d00) drop-shadow(0 0 28px #ff4d00); transform:scale(1.02); }
+}
+#marketBrand.market-brand {
+  display:block!important; width:100%!important; min-height:1.35em; text-align:center!important;
+  font-size:clamp(42px,11vw,88px)!important; font-weight:1000!important; line-height:1.25!important;
+  letter-spacing:1px!important; white-space:normal!important; overflow:visible!important;
+  background:linear-gradient(90deg,#fff000,#ff35c8,#00eaff,#7dff38,#ff7a00,#fff000)!important;
+  background-size:400% 100%!important; color:transparent!important; -webkit-text-fill-color:transparent!important;
+  -webkit-background-clip:text!important; background-clip:text!important;
+  animation:marketBrandFlash 1.15s ease-in-out infinite!important;
+  filter:drop-shadow(0 0 12px #fff000)!important;
+}
+#marketBrand.brand-hidden {display:block!important}
+@media(prefers-reduced-motion:reduce){#marketBrand.market-brand{animation:marketBrandFlash 1.15s ease-in-out infinite!important}}
+
+
+.merchant-auth{position:fixed;inset:0;z-index:7000;display:none;align-items:center;justify-content:center;padding:16px;background:radial-gradient(circle at 50% 10%,#2b8a69,#123a32 58%,#071f1a);overflow:auto}.merchant-auth.show{display:flex}.merchant-auth-card{width:min(470px,100%);max-height:96dvh;overflow:auto;background:#fff;color:#19372d;border-radius:24px;padding:24px;box-shadow:0 25px 80px #0006}.merchant-auth-logo{text-align:center;font-size:46px}.merchant-auth-card h2{text-align:center;margin:4px 0 6px;font-size:25px}.merchant-auth-sub{text-align:center;color:#63786e;font-size:13px;line-height:1.6;margin:0 0 18px}.merchant-auth-card h3{margin:10px 0 14px}.merchant-auth-card label{display:block;font-size:13px;font-weight:750;margin:10px 0 5px;color:#466156}.merchant-auth-card input,.merchant-auth-card select{width:100%;padding:12px;border:1px solid #d6e4dc;border-radius:11px;font:inherit;background:#fbfdfc;color:#18372d}.merchant-main-btn{width:100%;margin-top:16px;padding:13px}.merchant-switch{text-align:center;font-size:13px;color:#60766b}.merchant-switch button{border:0;background:none;color:#176b50;font:inherit;font-weight:850;cursor:pointer}.merchant-local-note{font-size:11px;line-height:1.7;color:#94651b;background:#fff7e5;border-radius:10px;padding:9px;margin:12px 0 0}#merchantAuthError{color:#b73535;font-size:13px;min-height:20px;margin-top:8px}.merchant-session-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.merchant-session-label{font-size:12px;color:#d8f1e6;font-weight:800}.merchant-logout{border:1px solid #ffffff66;background:#ffffff20;color:#fff;border-radius:10px;padding:8px 10px;font:inherit;font-weight:800;cursor:pointer}
+.payment-link-modal{position:fixed;inset:0;z-index:6500;display:none;align-items:center;justify-content:center;padding:16px;background:#071f1acc;overflow:auto}.payment-link-modal.show{display:flex}.payment-link-card{width:min(480px,100%);max-height:94dvh;overflow:auto;background:#fff;color:#19372d;border-radius:20px;padding:22px;box-shadow:0 20px 70px #0005}.payment-link-card h2{margin:0 0 8px}.payment-link-card label{display:block;font-size:13px;font-weight:800;margin:12px 0 5px}.payment-link-card input,.payment-link-card select{width:100%;padding:12px;border:1px solid #d6e4dc;border-radius:10px;font:inherit;background:#fbfdfc;color:#18372d}.payment-link-note{font-size:12px;line-height:1.8;background:#fff7e5;color:#80591c;padding:11px;border-radius:10px;margin:14px 0}.payment-link-status{font-size:13px;line-height:1.7;padding:10px;border-radius:10px;background:#eef6f1;margin:12px 0}.payment-link-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.payment-link-actions button{flex:1;min-width:120px}
+
+/* QR payment scanner */
+.qr-scan-modal{position:fixed;inset:0;z-index:7200;display:none;align-items:center;justify-content:center;padding:14px;background:#061b16dd;overflow:auto}.qr-scan-modal.show{display:flex}.qr-scan-card{width:min(520px,100%);max-height:94dvh;overflow:auto;background:#fff;color:#19372d;border-radius:20px;padding:18px;box-shadow:0 20px 70px #0006}.qr-scan-card h2{margin:0 0 8px}.qr-scan-card label{display:block;font-weight:800;font-size:13px;margin:12px 0 5px}.qr-scan-card input{width:100%;padding:13px;border:1px solid #d6e4dc;border-radius:11px;font:inherit;font-size:20px}.qr-camera-frame{margin-top:12px;background:#071c17;border-radius:15px;overflow:hidden;min-height:190px;display:grid;place-items:center;color:#d9eee5;text-align:center}.qr-camera-frame video{width:100%;max-height:320px;object-fit:cover;display:none}.qr-scan-result{margin-top:12px;padding:12px;border-radius:12px;background:#eef6f1;line-height:1.8;overflow-wrap:anywhere}.qr-scan-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.qr-scan-actions button{flex:1;min-width:125px}.qr-scan-warning{font-size:12px;line-height:1.8;color:#80591c;background:#fff7e5;padding:11px;border-radius:11px;margin-top:12px}
+
+</style>
+</head>
+<body>
+<div id="merchantAuth" class="merchant-auth" role="dialog" aria-modal="true" aria-label="حساب التاجر"><div class="merchant-auth-card"><div class="merchant-auth-logo">🏪</div><h2>منصة إدارة المحلات</h2><p class="merchant-auth-sub">يمكنك استخدام البرنامج مباشرة دون حساب تاجر. ربط حساب الدفع اختياري لاحقًا</p><div id="merchantLoginPane" class="hidden"><h3>تسجيل دخول التاجر</h3><label>رقم الهاتف</label><input id="merchantLoginPhone" inputmode="tel" placeholder="رقم الهاتف"><label>كلمة المرور</label><input id="merchantLoginPassword" type="password" placeholder="كلمة المرور"><button class="btn merchant-main-btn" onclick="loginMerchant()">دخول إلى محلي</button><p class="merchant-switch">أول مرة تستخدم البرنامج؟ <button onclick="switchMerchantAuth('register')">إنشاء حساب تاجر</button></p></div><div id="merchantRegisterPane" class="hidden"><h3>إنشاء حساب تاجر جديد</h3><label>اسم صاحب المحل</label><input id="merchantOwner" placeholder="الاسم الكامل"><label>اسم المحل / السوبر ماركت</label><input id="merchantShop" placeholder="مثال: سوبر ماركت النور"><label>رقم الهاتف (اسم الدخول)</label><input id="merchantPhone" inputmode="tel" placeholder="رقم الهاتف"><label>المدينة</label><input id="merchantCity" placeholder="المدينة"><label>وسيلة الدفع التي ترغب بربطها لاحقًا</label><select id="merchantWallet"><option value="none">لم أحدد بعد</option><option>Jawwal Pay</option><option>PalPay</option><option>بنك فلسطين</option><option>مال شات</option></select><label>كلمة المرور (8 أحرف على الأقل)</label><input id="merchantPassword" type="password" placeholder="كلمة مرور قوية"><label>تأكيد كلمة المرور</label><input id="merchantPasswordConfirm" type="password" placeholder="أعد كتابة كلمة المرور"><button class="btn merchant-main-btn" onclick="registerMerchant()">إنشاء حساب وفتح البرنامج</button><p class="merchant-switch">لديك حساب بالفعل؟ <button onclick="switchMerchantAuth('login')">تسجيل الدخول</button></p></div><div id="merchantAuthError" role="alert"></div><p class="merchant-local-note">نسخة تجريبية: الحسابات والبيانات تعمل محليًا على هذا الجهاز فقط. لم يتم تفعيل خادم مركزي أو ربط دفع حقيقي بعد.</p></div></div>
+
+<div id="splashScreen" aria-label="شاشة افتتاحية">
+  <div class="splash-card" onclick="dismissSplash()" role="button" tabindex="0" aria-label="اضغط للمتابعة">
+    <div class="splash-icon">🛒📒</div>
+    <div id="splashTitle" class="splash-title">دفتر ديون الماركت</div>
+    <div class="splash-sub">حساباتك مرتبة… بكل سهولة</div>
+    <div id="splashClock" class="splash-clock">--:--:--</div>
+    <div id="splashDate" class="splash-date"></div>
+    <div class="splash-tip">اضغط للمتابعة أو انتظر قليلًا ✨</div>
+  </div>
+</div>
+<div id="securityScreen" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+  <div class="security-card">
+    <div class="security-logo">🔐</div>
+    <h2 id="lockTitle">حماية برنامج الماركت</h2>
+    <p id="lockHint">أنشئ رمز دخول خاصًا بك لحماية فتح البرنامج.</p>
+    <div id="lockMethodWrap"><select id="lockMethod" onchange="updateLockInputMode()"><option value="pin">رقم سري PIN من 6 أرقام</option><option value="password">كلمة مرور</option></select></div>
+    <input id="lockCurrent" type="password" autocomplete="current-password" placeholder="رمز الدخول الحالي" class="hidden">
+    <input id="lockValue" type="password" autocomplete="new-password" placeholder="أدخل رقمًا سريًا من 6 أرقام" inputmode="numeric" maxlength="6">
+    <input id="lockConfirm" type="password" autocomplete="new-password" placeholder="أعد إدخال الرمز للتأكيد" inputmode="numeric" maxlength="6">
+    <div class="security-actions"><button id="lockSubmit" type="button" onclick="submitSecurity()">حفظ وبدء الاستخدام</button><button id="lockDisable" class="secondary hidden" type="button" onclick="disableSecurity()">إيقاف كلمة المرور</button></div>
+    <div id="lockError" role="alert"></div>
+    <p class="security-foot">احتفظ بنسخة احتياطية من بياناتك، ولا تنسَ رقم PIN أو كلمة المرور.</p>
+  </div>
+</div>
+
+<header><div class="wrap"><div class="header-tools"><button class="menu-open" type="button" onclick="toggleSideMenu(true)" aria-label="فتح القائمة">☰ القائمة</button><div class="merchant-session-tools"><span id="merchantSessionLabel" class="merchant-session-label"></span><button class="merchant-logout" type="button" onclick="logoutMerchant()">تسجيل الخروج</button></div><button class="theme-toggle" id="themeToggle" type="button" onclick="toggleTheme()">🌙 الوضع الليلي</button><div class="brand-row" style="flex:1"><h1 id="marketBrand" class="market-brand">✨ دفتر ديون الماركت ✨</h1><button id="brandVisibility" class="brand-visibility" type="button" onclick="toggleMarketNameVisibility()" title="إخفاء/إظهار اسم الماركت">×</button><button class="brand-edit" type="button" onclick="openBrandEditor()" title="إضافة/تعديل اسم السوبر ماركت">✏️ اسم الماركت</button></div></div><div class="clock-row"><span>🕒</span><strong id="liveClock">--:--:--</strong><span id="liveDate"></span></div><p>سجل الزبائن، الديون، الدفعات، والرصيد بطريقة سهلة</p></div></header>
+<div id="brandEditModal" class="brand-edit-modal" role="dialog" aria-modal="true" aria-label="تعديل اسم السوبر ماركت"><div class="brand-edit-card"><h3>اسم السوبر ماركت</h3><input id="brandNameInput" type="text" maxlength="60" placeholder="اكتب اسم السوبر ماركت هنا" onkeydown="if(event.key==='Enter')saveMarketName()"><div class="brand-edit-actions"><button class="btn" type="button" onclick="saveMarketName()">حفظ الاسم</button><button class="btn secondary" type="button" onclick="closeBrandEditor()">إلغاء</button></div></div></div>
+<div id="paymentLinkModal" class="payment-link-modal" role="dialog" aria-modal="true" aria-label="ربط حساب التاجر"><div class="payment-link-card"><h2>💳 تفعيل الدفع الإلكتروني</h2><p>اختر مزود الدفع الذي تتعامل معه. التفعيل اختياري، ويمكنك استخدام البرنامج كاملًا بدونه.</p><div id="paymentLinkStatus" class="payment-link-status">لا يوجد حساب دفع مسجل حاليًا.</div><label for="paymentProvider">شركة الدفع أو البنك</label><select id="paymentProvider" onchange="renderProviderGuide()"><option value="">اختر مزود الدفع</option><option>Jawwal Pay</option><option>PalPay</option><option>بنك فلسطين</option><option>مال شات</option></select><div id="paymentProviderGuide" class="payment-link-status" aria-live="polite">اختر مزود الدفع لعرض خطوات طلب التفعيل الرسمي.</div><label for="paymentMerchantNumber">رقم التاجر أو رقم الحساب المخصص للتاجر (إن وجد)</label><input id="paymentMerchantNumber" placeholder="يمكنك تركه فارغًا الآن" autocomplete="off"><label for="paymentMerchantPhone">رقم الهاتف المسجل لدى مزود الدفع (اختياري)</label><input id="paymentMerchantPhone" inputmode="tel" placeholder="رقم الهاتف"><div class="payment-link-note">تنبيه: حفظ هذه البيانات لا يفعّل استقبال المدفوعات ولا يربط البنك فعليًا. التفعيل الحقيقي يحتاج موافقة مزود الدفع وبيانات الربط الرسمية وواجهة آمنة منه. لا تدخل كلمة مرور محفظتك أو رمز OTP هنا.</div><div class="payment-link-actions"><button class="btn" type="button" onclick="savePaymentLinkInfo()">حفظ البيانات</button><button class="btn secondary" type="button" onclick="closePaymentLinkSettings()">إغلاق</button><button class="btn danger" type="button" onclick="clearPaymentLinkInfo()">إزالة البيانات</button></div></div></div>
+<main class="wrap">
+<section class="stats"><div class="stat"><div class="stat-head"><small>إجمالي الديون المتبقية</small><button id="debtVisibility" class="privacy-toggle" type="button" onclick="toggleDebtVisibility()" aria-label="إخفاء مجموع الديون" title="إخفاء/إظهار مجموع الديون">👁️</button></div><strong id="totalDebt">0.00</strong></div><div class="stat"><small>عدد الزبائن</small><strong id="customerCount">0</strong></div><div class="stat"><small>الزبائن عليهم ديون</small><strong id="debtorCount">0</strong></div></section>
+<nav class="app-nav" aria-label="التنقل الرئيسي"><button class="nav-btn active" id="navDebts" type="button" onclick="showAppSection('debts')">📒 دفتر الديون والزبائن</button><button class="nav-btn" id="navMarket" type="button" onclick="showAppSection('market')">💰 حركة الماركت</button><button class="nav-btn" id="navInventory" type="button" onclick="showAppSection('inventory')">📦 المخزون والبضائع</button><button class="nav-btn" id="navReports" type="button" onclick="showAppSection('reports')">📊 التقارير اليومية</button><button class="nav-btn" id="navBackup" type="button" onclick="showAppSection('backup')">🛡️ النسخ الاحتياطي</button><button class="nav-btn" id="navGuide" type="button" onclick="showAppSection('guide')">📘 شرح الاستخدام</button><button class="nav-btn" id="showReportsBtn" type="button" onclick="showDailyReports()">↻ إظهار التقارير اليومية</button></nav><section class="panel" id="customersPanel"><h2>الزبائن</h2><div class="market-actions" style="margin:0 0 13px"><button class="btn" type="button" style="background:linear-gradient(120deg,#123a32,#218267);padding:14px 18px;font-size:16px;box-shadow:0 5px 15px #176b5030" onclick="openQrPaymentScanner()">📷 الدفع بالماسح الضوئي QR</button></div><div class="toolbar"><input id="search" class="input" placeholder="🔎 ابحث باسم الزبون أو رقم الهاتف"><select id="sortMode" class="input" style="max-width:180px"><option value="name">ترتيب حسب الاسم</option><option value="debt">الأعلى دينًا</option></select><button class="btn" onclick="openCustomerModal()">＋ زبون جديد</button></div><div id="customers"></div><div id="customerPage"></div></section>
+<section class="panel" id="reportsPanel"><div class="reports-head"><h2>📊 التقارير اليومية</h2><button class="reports-hide" type="button" onclick="hideDailyReports()" aria-label="إخفاء التقارير اليومية" title="إخفاء التقارير اليومية">×</button></div><div class="toolbar"><input id="reportDate" class="input" type="date"><button class="btn secondary" onclick="renderReport()">عرض التقرير</button><button class="btn secondary" onclick="printReport()">🖨️ طباعة التقرير</button></div><div id="reportResults" class="empty">اختر التاريخ لعرض الديون والدفعات المسجلة في ذلك اليوم.</div></section>
+<section class="panel" id="backupPanel"><h2>حفظ واسترجاع البيانات</h2><div class="toolbar"><button class="btn secondary" onclick="exportBackup()">⬇️ تنزيل نسخة احتياطية</button><button class="btn secondary" onclick="document.getElementById('importFile').click()">⬆️ استرجاع نسخة</button><button class="btn secondary" onclick="exportCSV()">📄 تصدير Excel (CSV)</button><button class="btn secondary" onclick="window.print()">🖨️ طباعة</button><input id="importFile" type="file" accept=".json,application/json" class="hidden" onchange="importBackup(event)"></div><p class="footnote">البيانات محفوظة على هذا الجهاز والمتصفح فقط. نزّل نسخة احتياطية بشكل دوري، ولا تنتقل البيانات تلقائيًا إلى جهاز آخر.</p></section>
+
+<section class="panel" id="guidePanel">
+  <h2>📘 دليل استخدام البرنامج</h2>
+  <p>هذا الدليل يشرح أقسام البرنامج خطوة بخطوة. استخدم القائمة الجانبية اليمنى للانتقال بين الصفحات.</p>
+  <div class="guide-card"><h3>1. دفتر الديون والزبائن</h3><p>اضغط «زبون جديد»، واكتب اسم الزبون ورقم هاتفه وملاحظاته ثم احفظ. اضغط على اسم الزبون لفتح حسابه.</p><p>من صفحة الزبون استخدم «إضافة دين» لتسجيل ما أخذه، و«تسجيل دفعة» لتسجيل ما سدده. الرصيد المتبقي يُحسب تلقائيًا من مجموع الديون ناقص مجموع الدفعات.</p><p>يمكنك تعديل أو حذف أي عملية من سجل الزبون، وإرسال كشف حساب كامل له كنص أو PDF.</p></div>
+  <div class="guide-card"><h3>2. حركة الماركت</h3><p>«تسجيل دخل» للمبيعات النقدية أو الدخل الإضافي. «تسجيل مصروف» للمشتريات والكهرباء والمواصلات والأجور وغيرها. أدخل المبلغ والتاريخ والتصنيف ثم احفظ.</p><p>دفعة الزبون المسجلة من صفحة حسابه تُضاف تلقائيًا إلى دخل الصندوق كتسديد دين، فلا تسجلها مرة ثانية. ويمكنك مراجعة الحركات وتعديلها أو حذفها.</p><p>اختر اليوم أو آخر 7 أيام أو هذا الشهر أو كل الحركات لمراجعة الملخص، واستخدم كشف الفترة للطباعة.</p></div>
+  <div class="guide-card"><h3>3. المخزون والبضائع</h3><p>أضف الصنف باسمه وسعر الشراء وسعر البيع والكمية الحالية وحد التنبيه. يظهر لك إجمالي قيمة المخزون بسعر التكلفة وسعر البيع المتوقع.</p><p>من بطاقة الصنف تستطيع تعديل بياناته أو تسجيل شراء كمية جديدة. عند تسجيل توريد مع إدخال تكلفة إجمالية، تُسجّل كمصروف شراء بضاعة في حركة الماركت تلقائيًا. لا تسجل نفس الفاتورة مرة ثانية يدويًا حتى لا تتكرر المصروفات.</p><p>هذا القسم يتابع الكميات وقيمتها، ولا يخصم الكمية تلقائيًا عند البيع حاليًا؛ ربطه بالكاشير يأتي في مرحلة لاحقة.</p></div>
+  <div class="guide-card"><h3>4. التقارير</h3><p>اختر التاريخ ثم اضغط «عرض التقرير» لمشاهدة الديون والدفعات المسجلة في ذلك اليوم. ويمكنك طباعة التقرير.</p></div>
+  <div class="guide-card"><h3>5. النسخ الاحتياطي والاسترجاع</h3><p>اضغط «تنزيل نسخة احتياطية» لحفظ ملف يحتوي بياناتك. للاحتفاظ بنسخة آمنة، كرر ذلك بشكل دوري. لاسترجاع بيانات سابقة اضغط «استرجاع نسخة» واختر ملف JSON الصحيح.</p><p>لا تمسح بيانات المتصفح ولا تحذف بيانات الموقع؛ فالبرنامج يحفظ بياناته محليًا على الجهاز والمتصفح. انقل نسخة احتياطية عند تغيير الجهاز أو المتصفح.</p></div>
+  <div class="guide-card"><h3>6. القائمة والإضاءة واسم الماركت</h3><p>زر «القائمة» يفتح قائمة التنقل من جهة اليمين. زر «الوضع الليلي» يبدّل بين المظهر الفاتح والداكن ويحفظ اختيارك. اضغط «اسم الماركت» لتغيير الاسم، وزر × لإخفائه أو إظهاره.</p></div>
+  <div class="guide-card"><h3>7. قفل البرنامج بكلمة مرور أو بصمة</h3><p>عند استخدام تطبيق أندرويد ستظهر شاشة الدخول وبها خيار البصمة أو قفل الجهاز، بشرط إعداد وسيلة حماية على الهاتف. يبقى PIN أو كلمة المرور خيارًا احتياطيًا. عند أول تشغيل ستظهر شاشة إنشاء الحماية. اختر PIN من 6 أرقام أو كلمة مرور لا تقل عن 8 أحرف، ثم أعد إدخالها للتأكيد. عند فتح البرنامج يمكنك إدخال الرمز أو استخدام البصمة من تطبيق أندرويد.</p><p>من القائمة الجانبية اختر «تغيير / إيقاف كلمة المرور» لتغيير الرمز بعد إدخال الرمز الحالي، أو اختر «قفل البرنامج الآن» لقفله فورًا. يُقفل البرنامج تلقائيًا بعد 5 دقائق من عدم الاستخدام، أو عند الرجوع إليه بعد بقائه بالخلفية لأكثر من دقيقة.</p><p><b>تنبيه:</b> البصمة تعمل داخل تطبيق أندرويد المرفق بالمشروع فقط، وتحتاج إلى تسجيل بصمة أو إعداد قفل شاشة في الهاتف. PIN أو كلمة المرور داخل البرنامج تبقى وسيلة احتياطية. الحماية لا تشفّر ملف البيانات نفسه؛ احتفظ بنسخة احتياطية.</p></div>
+  <div class="guide-card"><h3>معلومة مهمة عن الحسابات</h3><p>صافي حركة الصندوق = الدخل النقدي − المصروفات. هذا يوضح حركة النقد المسجلة، وليس بالضرورة ربح الماركت المحاسبي؛ لأن البضاعة المتبقية والمخزون والتكاليف الأخرى تحتاج حسابًا منفصلًا.</p></div>
+</section>
+<section class="market-page" id="inventoryPage">
+  <div class="market-hero"><h2>📦 المخزون والبضائع</h2><p>سجّل أصناف الماركت وكمياتها وأسعارها، وتابع الأصناف التي قاربت على النفاد</p></div>
+  <div class="cash-stats">
+    <div class="cash-stat income"><small>عدد الأصناف</small><strong id="inventoryCount">0</strong></div>
+    <div class="cash-stat net"><small>قيمة المخزون بالتكلفة</small><strong id="inventoryCost">0.00 ₪</strong></div>
+    <div class="cash-stat expense"><small>أصناف وصلت حد التنبيه</small><strong id="inventoryLowCount">0</strong></div>
+  </div>
+  <div class="market-actions"><button class="btn income-btn" onclick="openProductModal()">＋ إضافة صنف جديد</button><button class="btn secondary" onclick="printInventory()">🖨️ طباعة المخزون</button></div>
+  <section class="panel"><div class="market-section-title"><h3>📋 قائمة البضائع</h3><strong id="inventoryRetailValue">قيمة البيع: 0.00 ₪</strong></div>
+    <div class="market-filters"><input id="inventorySearch" class="input" placeholder="🔎 ابحث باسم الصنف أو الباركود" oninput="renderInventory()"><select id="inventoryFilter" class="input" onchange="renderInventory()"><option value="all">كل الأصناف</option><option value="low">الأصناف منخفضة الكمية</option><option value="out">الأصناف النافدة</option></select></div>
+    <div id="inventoryItems"><div class="empty">لم تضف أي أصناف بعد. ابدأ بإضافة أول صنف.</div></div>
+  </section>
+</section>
+<section class="market-page" id="marketPage">
+  <div class="market-hero"><h2>💰 حركة الماركت</h2><p>تابع دخل الصندوق ومصروفاته بشكل مستقل عن أرصدة ديون الزبائن</p></div>
+  <div class="cash-stats">
+    <div class="cash-stat income"><small>إجمالي الدخل</small><strong id="marketIncomeTotal">0.00</strong></div>
+    <div class="cash-stat expense"><small>إجمالي المصروفات</small><strong id="marketExpenseTotal">0.00</strong></div>
+    <div class="cash-stat net"><small>صافي حركة الصندوق</small><strong id="marketNetTotal">0.00</strong></div>
+  </div>
+  <div class="market-actions">
+    <button class="btn income-btn" onclick="openMarketMovement('income')">＋ تسجيل دخل</button>
+    <button class="btn expense-btn" onclick="openMarketMovement('expense')">－ تسجيل مصروف</button>
+    <button class="btn debt-btn" onclick="openMarketMovement('debt_payment')">💵 تسجيل تسديد دين</button>
+  </div>
+  <section class="panel" style="margin-top:12px">
+    <div class="market-section-title"><h3>📈 ملخص الفترة</h3><select id="marketPeriod" class="input" style="max-width:160px" onchange="renderMarket()"><option value="today">اليوم</option><option value="week">آخر 7 أيام</option><option value="month">هذا الشهر</option><option value="all">كل الحركات</option></select></div>
+    <div class="market-report-grid"><div class="market-report-tile"><small>دخل الفترة</small><strong id="periodIncome">0.00</strong></div><div class="market-report-tile"><small>مصروفات الفترة</small><strong id="periodExpense">0.00</strong></div><div class="market-report-tile"><small>مشتريات البضاعة</small><strong id="periodStock">0.00</strong></div><div class="market-report-tile"><small>مصروفات تشغيلية</small><strong id="periodOperating">0.00</strong></div></div>
+  </section>
+  <section class="panel">
+    <div class="market-section-title"><h3>🧾 سجل الحركات</h3><button class="btn secondary small" onclick="printMarketStatement()">🖨️ كشف الفترة</button></div>
+    <div class="market-filters"><input id="marketFrom" class="input" type="date" aria-label="من تاريخ" onchange="renderMarket()"><input id="marketTo" class="input" type="date" aria-label="إلى تاريخ" onchange="renderMarket()"><input id="marketSearch" class="input" placeholder="🔎 ابحث في الحركات" oninput="renderMarket()"></div>
+    <div id="marketEntries"><div class="empty">لا توجد حركات مسجلة.</div></div>
+  </section>
+</section>
+
+</main>
+
+<div id="qrPaymentModal" class="qr-scan-modal" role="dialog" aria-modal="true" aria-label="الدفع بالماسح الضوئي"><div class="qr-scan-card"><h2>📷 الدفع بالماسح الضوئي QR</h2><p>أدخل المبلغ المطلوب، ثم افتح الكاميرا لمسح رمز QR الذي يعرضه الزبون من محفظته.</p><label for="qrPaymentAmount">المبلغ المطلوب (₪)</label><input id="qrPaymentAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="مثال: 25.00"><div class="qr-camera-frame"><video id="qrPaymentVideo" playsinline muted></video><div id="qrCameraHint">الكاميرا متوقفة. اضغط «فتح الكاميرا» للبدء.</div></div><div class="qr-scan-actions"><button class="btn" type="button" onclick="startQrCamera()">📷 فتح الكاميرا</button><button class="btn secondary" type="button" onclick="stopQrCamera()">إيقاف الكاميرا</button></div><div id="qrScanResult" class="qr-scan-result" aria-live="polite">لم يتم مسح أي رمز بعد.</div><div class="qr-scan-warning"><b>تنبيه مهم:</b> قراءة رمز QR لا تخصم الأموال ولا تثبت الدفع. هذه الشاشة تقرأ الرمز فقط. لن يتم تسجيل المبلغ كمدفوع إلا بعد ربط مزود المحفظة رسميًا واستلام تأكيد موثوق منه. لا تدخل الرقم السري أو رمز OTP في هذه الشاشة.</div><div class="qr-scan-actions"><button class="btn secondary" type="button" onclick="closeQrPaymentScanner()">إغلاق</button></div></div></div>
+<div class="side-shade" id="sideShade" onclick="toggleSideMenu(false)"></div>
+<aside class="side-menu" id="sideMenu" aria-label="القائمة الرئيسية">
+  <div class="side-menu-head"><span>🛒 قائمة البرنامج</span><button class="menu-close" onclick="toggleSideMenu(false)" aria-label="إغلاق القائمة">×</button></div>
+  <button class="menu-item" onclick="menuGo('debts')">📒 دفتر الديون والزبائن</button>
+  <button class="menu-item" onclick="menuGo('market')">💰 حركة الماركت</button>
+  <button class="menu-item" onclick="menuGo('inventory')">📦 المخزون والبضائع</button>
+  <button class="menu-item" onclick="menuGo('reports')">📊 التقارير اليومية</button>
+  <button class="menu-item" onclick="menuGo('backup')">🛡️ النسخ الاحتياطي</button>
+  <button class="menu-item" onclick="menuGo('guide')">📘 شرح استخدام البرنامج</button>
+  <button class="menu-item" onclick="openQrPaymentScanner()">📷 الدفع بالماسح الضوئي QR</button>
+  <button class="menu-item" onclick="openPaymentLinkSettings()">💳 ربط حساب التاجر (اختياري)</button>
+  <button class="menu-item" onclick="openSecuritySettings()">🔐 تغيير / إيقاف كلمة المرور</button>
+  <button class="menu-item" onclick="lockApp()">🔒 قفل البرنامج الآن</button>
+</aside>
+<div class="modal-bg" id="modal"><div class="modal"><h3 id="modalTitle">زبون جديد</h3><div class="field"><label>اسم الزبون *</label><input id="cName" placeholder="اسم الزبون"></div><div class="field"><label>رقم الهاتف</label><input id="cPhone" inputmode="tel" placeholder="رقم الهاتف (اختياري)"></div><div class="field"><label>ملاحظات</label><textarea id="cNotes" rows="2" placeholder="ملاحظات عن الزبون"></textarea></div><div id="initialBalances"><div class="field"><label>الدين عند إضافة الزبون (اختياري)</label><input id="cInitialDebt" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div><div class="field"><label>التسديد عند إضافة الزبون (اختياري)</label><input id="cInitialPayment" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div></div><div class="modal-actions"><button class="btn" onclick="saveCustomer()">حفظ</button><button class="btn secondary" onclick="closeModal()">إلغاء</button></div></div></div>
+<div class="modal-bg" id="txModal"><div class="modal"><h3 id="txTitle">إضافة دين</h3><div class="field"><label>المبلغ *</label><input id="txAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00"></div><div class="field"><label>التاريخ</label><input id="txDate" type="date"></div><div class="field"><label>البيان (شو أخذ أو شو دفع)</label><input id="txDesc" placeholder="مثال: مواد غذائية، تسديد دفعة"></div><div class="field"><label>ملاحظات</label><textarea id="txNotes" rows="2"></textarea></div><div class="modal-actions"><button class="btn" onclick="saveTransaction()">حفظ العملية</button><button class="btn secondary" onclick="closeTxModal()">إلغاء</button></div></div></div>
+<div class="modal-bg" id="statementFormatModal"><div class="modal"><h3>إرسال كشف حساب</h3><p>اختار الطريقة اللي بناسبك:</p><div class="modal-actions"><button class="btn" onclick="statementAsText()">💬 نص / مشاركة</button><button class="btn secondary" onclick="statementAsPdf()">📄 PDF</button><button class="btn secondary" onclick="statementAsSms()">📱 SMS</button></div><div class="modal-actions"><button class="btn secondary" onclick="closeStatementFormat()">إلغاء</button></div></div></div>
+
+<div class="modal-bg" id="marketModal"><div class="modal">
+  <h3 id="marketModalTitle">تسجيل حركة</h3>
+  <div class="field"><label>نوع الحركة</label><select id="marketType" onchange="updateMarketModalFields()"><option value="income">دخل</option><option value="expense">مصروف</option><option value="debt_payment">تسديد دين زبون</option></select></div>
+  <div class="field hidden" id="marketCustomerField"><label>الزبون</label><select id="marketCustomer"></select></div>
+  <div class="field" id="marketCategoryField"><label>التصنيف</label><select id="marketCategory"></select></div>
+  <div class="field"><label>المبلغ *</label><input id="marketAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00"></div>
+  <div class="field"><label>التاريخ</label><input id="marketDate" type="date"></div>
+  <div class="field"><label>البيان / الوصف</label><input id="marketDescription" placeholder="مثال: شراء بضاعة من المورد"></div>
+  <div class="market-modal-note" id="marketPaymentHint">تسديد الدين سيُسجّل دفعة في حساب الزبون، ويُضاف للصندوق كدخل دون اعتباره مبيعات جديدة.</div>
+  <div class="modal-actions"><button class="btn" onclick="saveMarketMovement()">حفظ الحركة</button><button class="btn secondary" onclick="closeMarketModal()">إلغاء</button></div>
+</div></div>
+
+<div class="modal-bg" id="productModal"><div class="modal">
+  <h3 id="productModalTitle">إضافة صنف جديد</h3>
+  <div class="field"><label>اسم الصنف *</label><input id="productName" placeholder="مثال: أرز 1 كيلو"></div>
+  <div class="field"><label>الباركود أو كود الصنف (اختياري)</label><input id="productCode" placeholder="امسح أو اكتب الباركود"></div>
+  <div class="field"><label>سعر الشراء للوحدة (₪) *</label><input id="productBuy" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div>
+  <div class="field"><label>سعر البيع للوحدة (₪) *</label><input id="productSell" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0.00"></div>
+  <div class="field"><label>الكمية الحالية *</label><input id="productQty" type="number" min="0" step="1" inputmode="numeric" placeholder="0"></div>
+  <div class="field"><label>حد التنبيه عند انخفاض الكمية</label><input id="productMin" type="number" min="0" step="1" inputmode="numeric" value="3"></div>
+  <div class="modal-actions"><button class="btn" onclick="saveProduct()">حفظ الصنف</button><button class="btn secondary" onclick="closeProductModal()">إلغاء</button></div>
+</div></div>
+<div class="modal-bg" id="restockModal"><div class="modal">
+  <h3 id="restockTitle">توريد بضاعة</h3><p id="restockCurrent" class="footnote"></p>
+  <div class="field"><label>الكمية المضافة *</label><input id="restockQty" type="number" min="1" step="1" inputmode="numeric" placeholder="الكمية"></div>
+  <div class="field"><label>تكلفة التوريد الإجمالية (₪) (اختياري)</label><input id="restockCost" type="number" min="0" step="0.01" inputmode="decimal" placeholder="اتركه فارغًا إذا لا تريد تسجيل مصروف"></div>
+  <div class="field"><label>التاريخ</label><input id="restockDate" type="date"></div>
+  <div class="field"><label>ملاحظات / اسم المورد</label><input id="restockNote" placeholder="اسم المورد أو رقم الفاتورة"></div>
+  <div class="modal-actions"><button class="btn" onclick="saveRestock()">حفظ التوريد</button><button class="btn secondary" onclick="closeRestockModal()">إلغاء</button></div>
+</div></div>
+
+<script>
+const SECURITY_SALT_KEY='market_management_security_salt_v1',SECURITY_HASH_KEY='market_management_security_hash_v1',SECURITY_METHOD_KEY='market_management_security_method_v1';
+let securityMode='setup',securityIdleTimer=null,securityHiddenAt=0;
+function securityConfigured(){return !!(localStorage.getItem(SECURITY_SALT_KEY)&&localStorage.getItem(SECURITY_HASH_KEY));}
+function showSecurityScreen(mode){securityMode=mode;const screen=document.getElementById('securityScreen'),methodWrap=document.getElementById('lockMethodWrap'),current=document.getElementById('lockCurrent'),confirm=document.getElementById('lockConfirm'),disable=document.getElementById('lockDisable'),submit=document.getElementById('lockSubmit'),hint=document.getElementById('lockHint'),title=document.getElementById('lockTitle'),value=document.getElementById('lockValue');
+ screen.classList.add('show');document.getElementById('lockError').textContent='';current.classList.toggle('hidden',mode!=='change');methodWrap.classList.toggle('hidden',mode!=='setup'&&mode!=='change');confirm.classList.toggle('hidden',mode==='login');disable.classList.toggle('hidden',mode!=='change');
+ if(mode==='setup'){title.textContent='إنشاء حماية البرنامج';hint.textContent='اختر رقم PIN من 6 أرقام أو كلمة مرور، ثم أكدها.';submit.textContent='حفظ وبدء الاستخدام';}
+ else if(mode==='login'){title.textContent='البرنامج محمي';hint.textContent='أدخل رقم PIN أو كلمة المرور لفتح البرنامج.';submit.textContent='فتح البرنامج';methodWrap.classList.add('hidden');}
+ else{title.textContent='إعدادات الحماية';hint.textContent='أدخل الرمز الحالي، ثم اختر طريقة الدخول الجديدة أو أوقف الحماية.';submit.textContent='حفظ التغيير';}
+ if(mode==='login'){const m=localStorage.getItem(SECURITY_METHOD_KEY)||'pin';value.type='password';value.inputMode=m==='pin'?'numeric':'text';value.maxLength=m==='pin'?6:120;value.placeholder=m==='pin'?'أدخل رقم PIN المكوّن من 6 أرقام':'أدخل كلمة المرور';}
+ else updateLockInputMode();current.value='';value.value='';confirm.value='';setTimeout(()=>{(mode==='change'?current:value).focus()},100);
+}
+function updateLockInputMode(){const m=document.getElementById('lockMethod').value,fields=[document.getElementById('lockValue'),document.getElementById('lockConfirm')];fields.forEach((f,i)=>{f.type='password';f.inputMode=m==='pin'?'numeric':'text';f.maxLength=m==='pin'?6:120;f.classList.toggle('pin-input',m==='pin');f.placeholder=m==='pin'?(i?'أعد إدخال PIN للتأكيد':'أدخل PIN من 6 أرقام'):(i?'أعد إدخال كلمة المرور':'أدخل كلمة مرور (8 أحرف على الأقل)')});}
+async function deriveSecurityHash(secret,salt){if(!window.crypto?.subtle||!window.crypto?.getRandomValues)throw new Error('المتصفح لا يدعم التشفير الآمن. افتح البرنامج من متصفح حديث عبر اتصال آمن.');const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),'PBKDF2',false,['deriveBits']);const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt,iterations:180000,hash:'SHA-256'},key,256);return Array.from(new Uint8Array(bits)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+function constantTimeEqual(a,b){if(typeof a!=='string'||typeof b!=='string'||a.length!==b.length)return false;let v=0;for(let i=0;i<a.length;i++)v|=a.charCodeAt(i)^b.charCodeAt(i);return v===0;}
+async function submitSecurity(){const err=document.getElementById('lockError'),value=document.getElementById('lockValue').value,confirm=document.getElementById('lockConfirm').value,method=document.getElementById('lockMethod').value,submit=document.getElementById('lockSubmit');err.textContent='';submit.disabled=true;const oldText=submit.textContent;submit.textContent='يرجى الانتظار…';try{
+ if(securityMode==='login'){const salt=Uint8Array.from(atob(localStorage.getItem(SECURITY_SALT_KEY)),c=>c.charCodeAt(0));const actual=await deriveSecurityHash(value,salt),expected=localStorage.getItem(SECURITY_HASH_KEY);if(!constantTimeEqual(actual,expected)){err.textContent='رمز الدخول غير صحيح. حاول مرة أخرى.';document.getElementById('lockValue').value='';return;}unlockApp();return;}
+ if(securityMode==='change'){const current=document.getElementById('lockCurrent').value,salt=Uint8Array.from(atob(localStorage.getItem(SECURITY_SALT_KEY)),c=>c.charCodeAt(0)),actual=await deriveSecurityHash(current,salt);if(!constantTimeEqual(actual,localStorage.getItem(SECURITY_HASH_KEY))){err.textContent='رمز الدخول الحالي غير صحيح.';return;}}
+ if(method==='pin'&&!/^\d{6}$/.test(value)){err.textContent='رقم PIN يجب أن يتكون من 6 أرقام بالضبط.';return;}
+ if(method==='password'&&value.length<8){err.textContent='كلمة المرور يجب ألا تقل عن 8 أحرف.';return;}
+ if(value!==confirm){err.textContent='التأكيد غير مطابق. أعد كتابة الرمز.';return;}
+ const salt=crypto.getRandomValues(new Uint8Array(16)),hash=await deriveSecurityHash(value,salt);localStorage.setItem(SECURITY_SALT_KEY,btoa(String.fromCharCode(...salt)));localStorage.setItem(SECURITY_HASH_KEY,hash);localStorage.setItem(SECURITY_METHOD_KEY,method);alert(securityMode==='setup'?'تم إنشاء كلمة المرور بنجاح.':'تم تحديث بيانات الدخول بنجاح.');unlockApp();
+ }catch(e){err.textContent=e.message||'تعذر حفظ الحماية.';}finally{submit.disabled=false;submit.textContent=oldText;}}
+function unlockApp(){document.getElementById('securityScreen').classList.remove('show');document.getElementById('lockValue').value='';document.getElementById('lockCurrent').value='';resetSecurityIdle();}
+function lockApp(){if(!securityConfigured())return;clearTimeout(securityIdleTimer);const s=document.getElementById('securityScreen');if(s.classList.contains('show'))return;showSecurityScreen('login');}
+function openSecuritySettings(){toggleSideMenu(false);if(!securityConfigured()){showSecurityScreen('setup');return;}showSecurityScreen('change');}
+async function disableSecurity(){const current=document.getElementById('lockCurrent').value,err=document.getElementById('lockError');err.textContent='';try{const salt=Uint8Array.from(atob(localStorage.getItem(SECURITY_SALT_KEY)),c=>c.charCodeAt(0)),actual=await deriveSecurityHash(current,salt);if(!constantTimeEqual(actual,localStorage.getItem(SECURITY_HASH_KEY))){err.textContent='رمز الدخول الحالي غير صحيح.';return;}if(!confirm('هل تريد إيقاف كلمة المرور؟'))return;localStorage.removeItem(SECURITY_SALT_KEY);localStorage.removeItem(SECURITY_HASH_KEY);localStorage.removeItem(SECURITY_METHOD_KEY);unlockApp();alert('تم إيقاف الحماية.');}catch(e){err.textContent=e.message||'تعذر إيقاف الحماية.';}}
+function resetSecurityIdle(){clearTimeout(securityIdleTimer);if(securityConfigured()&&!document.getElementById('securityScreen').classList.contains('show'))securityIdleTimer=setTimeout(lockApp,5*60*1000);}
+['click','keydown','touchstart','scroll'].forEach(ev=>document.addEventListener(ev,resetSecurityIdle,{passive:true}));document.addEventListener('visibilitychange',()=>{if(document.hidden)securityHiddenAt=Date.now();else if(securityHiddenAt&&Date.now()-securityHiddenAt>60000)lockApp();else resetSecurityIdle();});
+const MERCHANTS_KEY='market_saas_merchants_v1',MERCHANT_SESSION_KEY='market_saas_session_v1';let activeMerchant=null,activeMerchantId=null;
+function merchantScopedKey(key){return activeMerchantId?key+'_'+activeMerchantId:key;}
+async function merchantHash(password,saltB64){const salt=saltB64?Uint8Array.from(atob(saltB64),c=>c.charCodeAt(0)):crypto.getRandomValues(new Uint8Array(16));const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits']);const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt,iterations:180000,hash:'SHA-256'},key,256);return {salt:btoa(String.fromCharCode(...salt)),hash:Array.from(new Uint8Array(bits)).map(x=>x.toString(16).padStart(2,'0')).join('')};}
+function merchantList(){try{return JSON.parse(localStorage.getItem(MERCHANTS_KEY)||'[]')}catch(e){return []}}
+function showMerchantAuth(mode='login'){document.getElementById('merchantAuth').classList.add('show');document.getElementById('merchantLoginPane').classList.toggle('hidden',mode!=='login');document.getElementById('merchantRegisterPane').classList.toggle('hidden',mode!=='register');document.getElementById('merchantAuthError').textContent='';document.getElementById('splashScreen').classList.add('hide');}
+function switchMerchantAuth(mode){showMerchantAuth(mode)}
+function startMerchantSession(merchant){activeMerchant=merchant;activeMerchantId=merchant.id;STORAGE='market_debts_data_'+merchant.id;if(!merchant.isLocal)localStorage.setItem(MERCHANT_SESSION_KEY,merchant.id);else localStorage.removeItem(MERCHANT_SESSION_KEY);document.getElementById('merchantAuth').classList.remove('show');document.getElementById('merchantSessionLabel').textContent=merchant.isLocal?'':' '+merchant.shopName;document.querySelector('.merchant-logout').style.display=merchant.isLocal?'none':'';document.querySelector('.merchant-session-tools').style.display=merchant.isLocal?'none':'flex';document.getElementById('marketBrand').textContent='✨ '+merchant.shopName+' ✨';localStorage.setItem(merchantScopedKey('market_debts_shop_name_v1'),merchant.shopName);marketNameVisible=true;load();setupMarketBack();render();renderReport();renderMarket();showAppSection('debts');if(localStorage.getItem(merchantScopedKey(REPORTS_VIS_KEY))==='false'){document.body.classList.add('reports-hidden');document.getElementById('reportsPanel').style.display='none';}else{document.body.classList.remove('reports-hidden');}if(securityConfigured())showSecurityScreen('login');else showSecurityScreen('setup');}
+async function registerMerchant(){const err=document.getElementById('merchantAuthError');err.textContent='';const owner=document.getElementById('merchantOwner').value.trim(),shop=document.getElementById('merchantShop').value.trim(),phone=document.getElementById('merchantPhone').value.trim(),city=document.getElementById('merchantCity').value.trim(),wallet=document.getElementById('merchantWallet').value,password=document.getElementById('merchantPassword').value,confirmPass=document.getElementById('merchantPasswordConfirm').value;if(!owner||!shop||!phone||!password){err.textContent='أكمل الاسم واسم المحل ورقم الهاتف وكلمة المرور.';return}if(password.length<8){err.textContent='كلمة المرور يجب ألا تقل عن 8 أحرف.';return}if(password!==confirmPass){err.textContent='كلمتا المرور غير متطابقتين.';return}if(merchantList().some(m=>m.phone===phone)){err.textContent='هذا الرقم مسجل مسبقًا. سجل الدخول بدلًا من ذلك.';return}try{const creds=await merchantHash(password);const id='m_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);const merchant={id,owner,shopName:shop,phone,city,wallet,passwordSalt:creds.salt,passwordHash:creds.hash,createdAt:new Date().toISOString()};const list=merchantList();list.push(merchant);localStorage.setItem(MERCHANTS_KEY,JSON.stringify(list));const legacy=localStorage.getItem('market_debts_v1');if(legacy&&!localStorage.getItem('market_debts_data_'+id)){localStorage.setItem('market_debts_data_'+id,legacy);localStorage.removeItem('market_debts_v1');}startMerchantSession(merchant);}catch(e){err.textContent='تعذر إنشاء الحساب. تأكد أن المتصفح يدعم التشفير الآمن.'}}
+async function loginMerchant(){const err=document.getElementById('merchantAuthError');err.textContent='';const phone=document.getElementById('merchantLoginPhone').value.trim(),password=document.getElementById('merchantLoginPassword').value,merchant=merchantList().find(m=>m.phone===phone);if(!merchant){err.textContent='رقم الهاتف غير مسجل.';return}try{const creds=await merchantHash(password,merchant.passwordSalt);if(creds.hash!==merchant.passwordHash){err.textContent='كلمة المرور غير صحيحة.';return}startMerchantSession(merchant);}catch(e){err.textContent='تعذر تسجيل الدخول.'}}
+function logoutMerchant(){if(!activeMerchant)return;if(!confirm('هل تريد تسجيل الخروج من حساب هذا المحل؟'))return;save();localStorage.removeItem(MERCHANT_SESSION_KEY);activeMerchant=null;activeMerchantId=null;STORAGE='market_debts_v1';document.getElementById('securityScreen').classList.remove('show');showMerchantAuth('login');}
+const PAYMENT_LINK_KEY='market_payment_link_info_v1';
+const PAYMENT_PROVIDER_GUIDES={
+ 'Jawwal Pay':'اطلب من جوال باي فتح/اعتماد حساب تاجر باسم محلك. اسألهم تحديدًا عن خدمة QR للتجار وعن واجهة ربط رسمية للبرامج الخارجية (API/SDK) وإشعار تأكيد الدفع. بعد الموافقة استخدم بيانات التاجر الرسمية التي يزودونك بها فقط.',
+ 'PalPay':'تواصل مع PalPay لفتح محفظة/حساب تاجر باسم محلك. اطلب منهم خدمة قبول الدفع للتجار عبر QR، واسأل عن API/SDK رسمي لإنشاء طلب دفع بمبلغ محدد واستقبال تأكيد العملية. لا تعتبر مسح الرمز وحده إثباتًا للدفع.',
+ 'بنك فلسطين':'تواصل مع قسم خدمات التجار/المدفوعات الإلكترونية في بنك فلسطين لطلب خدمة قبول المدفوعات المناسبة لنشاطك. اسأل عن متطلبات حساب التاجر، وخيار QR أو SoftPOS، ووجود API/SDK رسمي وإشعارات تأكيد للأنظمة الخارجية.',
+ 'مال شات':'تواصل مع مال شات واطلب تفعيل استقبال المدفوعات للتجار باسم محلك. اسألهم هل يوفرون QR بمبلغ محدد وواجهة تكامل رسمية (API/SDK) وإشعارًا موثوقًا يؤكد نجاح الدفع.'
+};
+function renderProviderGuide(){const provider=document.getElementById('paymentProvider').value;const guide=document.getElementById('paymentProviderGuide');guide.textContent=provider?(PAYMENT_PROVIDER_GUIDES[provider]||'تواصل مع مزود الخدمة واطلب اعتماد حساب تاجر وواجهة ربط رسمية.'):'اختر مزود الدفع لعرض خطوات طلب التفعيل الرسمي.';}
+function openPaymentLinkSettings(){toggleSideMenu(false);const info=JSON.parse(localStorage.getItem(merchantScopedKey(PAYMENT_LINK_KEY))||'{}');document.getElementById('paymentProvider').value=info.provider||'';document.getElementById('paymentMerchantNumber').value=info.merchantNumber||'';document.getElementById('paymentMerchantPhone').value=info.phone||'';renderProviderGuide();renderPaymentLinkStatus(info);document.getElementById('paymentLinkModal').classList.add('show');}
+function closePaymentLinkSettings(){document.getElementById('paymentLinkModal').classList.remove('show');}
+function renderPaymentLinkStatus(info={}){const el=document.getElementById('paymentLinkStatus');if(info.provider||info.merchantNumber||info.phone){el.textContent='تم حفظ اختيار مزود الدفع وبيانات التاجر على هذا الجهاز فقط. حالة الربط: إعداد محفوظ، وليس تفعيلًا حقيقيًا للدفع.';}else{el.textContent='لا يوجد مزود دفع محفوظ. البرنامج يعمل بشكل طبيعي دون حساب تاجر.';}}
+function savePaymentLinkInfo(){const info={provider:document.getElementById('paymentProvider').value,merchantNumber:document.getElementById('paymentMerchantNumber').value.trim(),phone:document.getElementById('paymentMerchantPhone').value.trim(),status:'setup_only'};localStorage.setItem(merchantScopedKey(PAYMENT_LINK_KEY),JSON.stringify(info));renderPaymentLinkStatus(info);alert('تم حفظ الإعدادات على هذا الجهاز. هذا لا يعني اعتماد الحساب أو تفعيل استقبال الأموال.');}
+function clearPaymentLinkInfo(){if(!confirm('هل تريد إزالة بيانات حساب الدفع المحفوظة؟'))return;localStorage.removeItem(merchantScopedKey(PAYMENT_LINK_KEY));document.getElementById('paymentProvider').value='';document.getElementById('paymentMerchantNumber').value='';document.getElementById('paymentMerchantPhone').value='';renderProviderGuide();renderPaymentLinkStatus({});}
+
+function initMerchantApp(){const session=localStorage.getItem(MERCHANT_SESSION_KEY),merchant=merchantList().find(m=>m.id===session);if(merchant){startMerchantSession(merchant);return}const localId='local_default';const legacy=localStorage.getItem('market_debts_v1');if(legacy&&!localStorage.getItem('market_debts_data_'+localId)){localStorage.setItem('market_debts_data_'+localId,legacy);localStorage.removeItem('market_debts_v1');}const shopName=localStorage.getItem('market_debts_shop_name_v1')||'دفتر ديون الماركت';startMerchantSession({id:localId,shopName,isLocal:true});}
+let STORAGE='market_debts_v1';const DEBT_VISIBILITY='market_debts_total_visible_v1';let totalDebtVisible=localStorage.getItem(merchantScopedKey(DEBT_VISIBILITY))!=='false';let db={customers:[]};let editingCustomer=null,currentTxCustomer=null,currentTxType='charge',selectedCustomerId=null;
+function load(){try{const raw=localStorage.getItem(STORAGE);if(raw)db=JSON.parse(raw);if(!Array.isArray(db.customers))db={customers:[]};if(!Array.isArray(db.products))db.products=[];if(!Array.isArray(db.marketTransactions)){db.marketTransactions=[];db.customers.forEach(c=>(c.transactions||[]).filter(t=>t.type==='payment').forEach(t=>db.marketTransactions.push({id:uid(),direction:'income',category:'تسديد ديون الزبائن',amount:Number(t.amount||0),date:t.date||dateToday(),description:t.description||('تسديد دين - '+(c.name||'زبون')),customerId:c.id,linkedCustomerTxId:t.id,notes:t.notes||''})));}}catch(e){db={customers:[],marketTransactions:[],products:[]}}}
+function save(){localStorage.setItem(STORAGE,JSON.stringify(db));render()}
+function balance(c){return (c.transactions||[]).reduce((s,t)=>s+(t.type==='charge'?Number(t.amount):-Number(t.amount)),0)}
+function money(v){return Number(v||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function dateToday(){return new Date().toISOString().slice(0,10)}
+function toggleDebtVisibility(){totalDebtVisible=!totalDebtVisible;localStorage.setItem(merchantScopedKey(DEBT_VISIBILITY),String(totalDebtVisible));render()}
+function render(){const all=db.customers;const total=all.reduce((sum,c)=>sum+Math.max(0,balance(c)),0);document.getElementById('totalDebt').textContent=totalDebtVisible?money(total):'';const eye=document.getElementById('debtVisibility');eye.textContent=totalDebtVisible?'👁️':'🙈';eye.setAttribute('aria-label',totalDebtVisible?'إخفاء مجموع الديون':'إظهار مجموع الديون');eye.title=totalDebtVisible?'إخفاء مجموع الديون':'إظهار مجموع الديون';document.getElementById('customerCount').textContent=all.length;document.getElementById('debtorCount').textContent=all.filter(c=>balance(c)>0.005).length;const q=document.getElementById('search').value.trim().toLowerCase();const list=all.filter(c=>(c.name||'').toLowerCase().includes(q)||(c.phone||'').toLowerCase().includes(q)).sort((a,b)=>document.getElementById('sortMode')?.value==='debt'?balance(b)-balance(a):a.name.localeCompare(b.name,'ar'));const holder=document.getElementById('customers');if(!list.length){holder.innerHTML='<div class="empty">'+(all.length?'لا يوجد زبون مطابق للبحث':'لسه ما أضفت زبائن. اضغط «زبون جديد» للبدء.')+'</div>'}else{holder.innerHTML=list.map(c=>{const id=esc(c.id);return `<button type="button" class="customer-name-only" style="width:100%;text-align:right;cursor:pointer" onclick="openCustomerPage('${id}')"><span class="name-link">${esc(c.name)}</span><span class="open-arrow">‹</span></button>`}).join('')}renderCustomerPage();}
+function openCustomerPage(id){selectedCustomerId=id;document.getElementById('search').value='';history.pushState({marketCustomer:id},'',location.pathname+location.search+'#customer-'+encodeURIComponent(id));render();}
+function closeCustomerPage(){if(selectedCustomerId!==null){history.back();}}
+// Native Android/browser back: close overlays first, then customer page.
+let marketBackGuardReady=false;
+function setupMarketBack(){if(marketBackGuardReady)return;marketBackGuardReady=true;history.replaceState({marketHome:true},'',location.pathname+location.search);history.pushState({marketBackGuard:true},'',location.pathname+location.search+'#home');window.addEventListener('popstate',function(){const modal=document.getElementById('modal'),txModal=document.getElementById('txModal');if(txModal.classList.contains('show')){txModal.classList.remove('show');return;}if(modal.classList.contains('show')){modal.classList.remove('show');return;}if(selectedCustomerId!==null){selectedCustomerId=null;render();return;}});}
+
+function renderCustomerPage(){const page=document.getElementById('customerPage'),holder=document.getElementById('customers'),customerPanel=holder.closest('.panel'),toolbar=customerPanel.querySelector('.toolbar'),heading=customerPanel.querySelector('h2'),stats=document.querySelector('.stats'),reports=document.getElementById('reportsPanel'),backup=document.getElementById('backupPanel');const c=db.customers.find(x=>x.id===selectedCustomerId);if(!c){page.classList.remove('open');page.innerHTML='';holder.style.display='';toolbar.style.display='';heading.style.display='';stats.style.display='';reports.style.display='';backup.style.display='';return}holder.style.display='none';toolbar.style.display='none';heading.style.display='none';stats.style.display='none';reports.style.display='none';backup.style.display='none';page.className='customer-page open';const txs=(c.transactions||[]).slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));const charges=txs.filter(t=>t.type==='charge').reduce((s,t)=>s+Number(t.amount),0);const payments=txs.filter(t=>t.type==='payment').reduce((s,t)=>s+Number(t.amount),0);page.innerHTML=`<div class="page-head"><button class="back-btn" onclick="closeCustomerPage()">← رجوع للزبائن</button><div class="page-customer-name">${esc(c.name)}</div>${c.phone?`<div>📞 ${esc(c.phone)}</div>`:''}<div class="customer-amount-line"><div class="page-balance privacy-value" data-value="${money(balance(c))}">${money(balance(c))}</div><button class="amount-eye" onclick="toggleAmount(this)" aria-label="إخفاء أو إظهار الرصيد">×</button></div><div>الرصيد الحالي على الزبون</div></div><div class="page-summary"><div class="summary-tile"><span>إجمالي ما أخذ</span><div class="customer-amount-line"><strong class="charge privacy-value" data-value="${money(charges)}">${money(charges)}</strong><button class="amount-eye" onclick="toggleAmount(this)">×</button></div></div><div class="summary-tile payment-tile"><span>إجمالي ما دفع</span><div class="customer-amount-line"><strong class="payment privacy-value" data-value="${money(payments)}">${money(payments)}</strong><button class="amount-eye" onclick="toggleAmount(this)">×</button></div></div></div><div class="actions" style="margin:0 0 14px"><button class="btn" onclick="openTx('${esc(c.id)}','charge')">＋ إضافة دين</button><button class="btn secondary" onclick="openTx('${esc(c.id)}','payment')">💵 تسجيل دفعة</button><button class="btn secondary" onclick="editCustomer('${esc(c.id)}')">✏️ تعديل بيانات</button><button class="btn secondary" onclick="chooseStatementFormat('${esc(c.id)}')">📤 كشف حساب / إرسال</button></div>${c.notes?`<div class="panel" style="margin:0 0 12px;background:#fff9e9;border-color:#f1dfb5">📝 <b>ملاحظات الزبون</b><div style="margin-top:6px">${esc(c.notes)}</div></div>`:''}<h3 style="margin:12px 0">📋 سجل الديون والدفعات</h3><div class="page-transactions">${txs.map(t=>`<div class="page-tx ${t.type==='charge'?'charge-tx':'payment-tx'}"><div><b>${esc(t.description||(t.type==='charge'?'دين':'دفعة'))}</b><div class="meta">📅 ${esc(t.date||'')} ${t.notes?`<div style="margin-top:4px">📝 ${esc(t.notes)}</div>`:''}</div><div class="tx-tools"><button onclick="editTransaction('${esc(c.id)}','${esc(t.id)}')">✏️ تعديل</button><button onclick="deleteTransaction('${esc(c.id)}','${esc(t.id)}')">🗑️ حذف</button></div></div><div><div class="tx-value ${t.type==='charge'?'charge':'payment'} privacy-value" data-value="${(t.type==='charge'?'+':'−')+money(t.amount)}">${(t.type==='charge'?'+':'−')+money(t.amount)}</div><button class="amount-eye" onclick="toggleAmount(this)">× إخفاء</button></div></div>`).join('')||'<div class="empty">ما في ديون أو دفعات مسجلة لحد الآن.</div>'}</div>`;} 
+function toggleAmount(button){const wrap=button.parentElement;const value=wrap.querySelector('.privacy-value');if(!value)return;const hidden=value.dataset.hidden==='true';value.textContent=hidden?value.dataset.value:'••••••';value.dataset.hidden=hidden?'false':'true';button.textContent=hidden?'×':'↻';button.title=hidden?'إخفاء المبلغ':'إظهار المبلغ';}
+
+let statementCustomerId=null;
+function chooseStatementFormat(id){statementCustomerId=id;document.getElementById('statementFormatModal').classList.add('show');}
+function closeStatementFormat(){document.getElementById('statementFormatModal').classList.remove('show');}
+function statementAsText(){const id=statementCustomerId;closeStatementFormat();if(id)shareCustomerStatement(id);}
+function statementAsPdf(){const id=statementCustomerId;closeStatementFormat();if(id)printCustomerStatementPdf(id);}
+function statementAsSms(){const id=statementCustomerId,c=db.customers.find(x=>x.id===id);closeStatementFormat();if(!c)return;if(!c.phone){alert('أضف رقم هاتف الزبون أولاً لإرسال SMS.');return;}const shop=localStorage.getItem(merchantScopedKey(MARKET_NAME_KEY))||'دفتر ديون الماركت';const body=`${shop} - كشف حساب ${c.name}. الرصيد المتبقي: ${money(balance(c))} شيكل.`;location.href='sms:'+encodeURIComponent(c.phone)+'?body='+encodeURIComponent(body);}
+
+async function shareCustomerStatement(cid){
+ const c=db.customers.find(x=>x.id===cid);if(!c)return;
+ const txs=(c.transactions||[]).slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+ const charges=txs.filter(t=>t.type==='charge').reduce((sum,t)=>sum+Number(t.amount||0),0);
+ const payments=txs.filter(t=>t.type==='payment').reduce((sum,t)=>sum+Number(t.amount||0),0);
+ const shop=localStorage.getItem(merchantScopedKey(MARKET_NAME_KEY))||'دفتر ديون الماركت';
+ const lines=[`كشف حساب الزبون`,`${shop}`,`اسم الزبون: ${c.name}`,c.phone?`رقم الهاتف: ${c.phone}`:'',`تاريخ الكشف: ${new Date().toLocaleDateString('ar-PS')}`,'',`إجمالي ما أخذ (ديون): ${money(charges)}`,`إجمالي ما دفع: ${money(payments)}`,`الرصيد المتبقي: ${money(balance(c))}`,'','تفاصيل العمليات:'];
+ txs.forEach((t,i)=>{lines.push(`${i+1}) ${t.type==='charge'?'دين / أخذ':'دفعة / دفع'} | التاريخ: ${t.date||'غير محدد'} | المبلغ: ${money(t.amount)} | البيان: ${t.description|| (t.type==='charge'?'دين':'دفعة')}${t.notes?` | ملاحظات: ${t.notes}`:''}`)});
+ if(c.notes)lines.push('','ملاحظات الزبون: '+c.notes);
+ lines.push('','هذا كشف حساب بجميع الديون والدفعات المسجلة.');
+ const text=lines.join('\n');
+ if(navigator.share){try{await navigator.share({title:`كشف حساب ${c.name}`,text});return}catch(e){if(e&&e.name==='AbortError')return;}}
+ if(navigator.clipboard&&navigator.clipboard.writeText){try{await navigator.clipboard.writeText(text);alert('تم نسخ كشف الحساب كاملًا. افتح واتساب أو أي محادثة والصقه لإرساله للزبون.');return}catch(e){}}
+ prompt('انسخ كشف الحساب التالي وأرسله للزبون:',text);
+}
+function printCustomerStatementPdf(cid){
+ const c=db.customers.find(x=>x.id===cid);if(!c)return;
+ const txs=(c.transactions||[]).slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+ const charges=txs.filter(t=>t.type==='charge').reduce((sum,t)=>sum+Number(t.amount||0),0);
+ const payments=txs.filter(t=>t.type==='payment').reduce((sum,t)=>sum+Number(t.amount||0),0);
+ const shop=localStorage.getItem(merchantScopedKey(MARKET_NAME_KEY))||'دفتر ديون الماركت';
+ const escHtml=x=>String(x??'').replace(/[&<>\"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m]));
+ const rows=txs.map((t,i)=>`<tr><td>${i+1}</td><td>${escHtml(t.date||'—')}</td><td>${t.type==='charge'?'دين (أخذ)':'دفعة (تسديد)'}</td><td>${escHtml(t.description||'—')}</td><td>${money(t.amount)}</td><td>${escHtml(t.notes||'—')}</td></tr>`).join('');
+ const html=`<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>كشف حساب ${escHtml(c.name)}</title><style>body{font-family:Arial,Tahoma,sans-serif;padding:22px;color:#222}h1,h2{text-align:center}h1{font-size:23px}table{width:100%;border-collapse:collapse;margin-top:20px}th,td{border:1px solid #bbb;padding:8px;text-align:right;font-size:12px}th{background:#e8f2ed}.totals{display:flex;gap:10px;margin:18px 0}.totals div{border:1px solid #bbb;padding:12px;flex:1;border-radius:8px} @media print{button{display:none}}</style></head><body><h1>${escHtml(shop)}</h1><h2>كشف حساب الزبون</h2><p><b>اسم الزبون:</b> ${escHtml(c.name)} &nbsp; <b>الهاتف:</b> ${escHtml(c.phone||'—')}</p><p><b>تاريخ الكشف:</b> ${new Date().toLocaleDateString('ar-PS')}</p><div class="totals"><div>إجمالي ما أخذ: <b>${money(charges)}</b></div><div>إجمالي ما دفع: <b>${money(payments)}</b></div><div>الرصيد المتبقي: <b>${money(balance(c))}</b></div></div><table><thead><tr><th>#</th><th>التاريخ</th><th>النوع</th><th>البيان</th><th>المبلغ</th><th>ملاحظات</th></tr></thead><tbody>${rows}</tbody></table>${c.notes?`<p><b>ملاحظات الزبون:</b> ${escHtml(c.notes)}</p>`:''}<p style="margin-top:25px;text-align:center">كشف حساب بجميع الديون والدفعات المسجلة</p><script>window.onload=()=>window.print();<\/script></body></html>`;
+ const win=window.open('','_blank');if(!win){alert('اسمح بالنوافذ المنبثقة حتى يفتح كشف PDF للطباعة.');return;}win.document.open();win.document.write(html);win.document.close();
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function openCustomerModal(id=null){editingCustomer=id;const c=id?db.customers.find(x=>x.id===id):null;document.getElementById('modalTitle').textContent=c?'تعديل بيانات الزبون':'زبون جديد';document.getElementById('cName').value=c?.name||'';document.getElementById('cPhone').value=c?.phone||'';document.getElementById('cNotes').value=c?.notes||'';const initial=document.getElementById('initialBalances');initial.classList.toggle('hidden',!!c);document.getElementById('cInitialDebt').value='';document.getElementById('cInitialPayment').value='';document.getElementById('modal').classList.add('show')}
+function editCustomer(id){openCustomerModal(id)}function closeModal(){document.getElementById('modal').classList.remove('show')}
+function saveCustomer(){const name=document.getElementById('cName').value.trim();if(!name){alert('اكتب اسم الزبون');return}const phone=document.getElementById('cPhone').value.trim(),notes=document.getElementById('cNotes').value.trim();if(editingCustomer){let c=db.customers.find(x=>x.id===editingCustomer);if(c){c.name=name;c.phone=phone;c.notes=notes}}else{const c={id:uid(),name,phone,notes,transactions:[]};const debt=Number(document.getElementById('cInitialDebt').value||0),payment=Number(document.getElementById('cInitialPayment').value||0);if(debt>0)c.transactions.push({id:uid(),type:'charge',amount:debt,date:dateToday(),description:'دين عند إضافة الزبون',notes:''});if(payment>0){const txId=uid();c.transactions.push({id:txId,type:'payment',amount:payment,date:dateToday(),description:'تسديد عند إضافة الزبون',notes:''});db.marketTransactions=db.marketTransactions||[];db.marketTransactions.push({id:uid(),direction:'income',category:'تسديد ديون الزبائن',amount:payment,date:dateToday(),description:'تسديد دين - '+name,customerId:c.id,linkedCustomerTxId:txId,notes:''});}db.customers.push(c)}closeModal();save()}
+function deleteCustomer(id){const c=db.customers.find(x=>x.id===id);if(!c)return;if(confirm('حذف الزبون '+c.name+' وكل العمليات المسجلة له؟ لا يمكن التراجع.')){db.customers=db.customers.filter(x=>x.id!==id);save()}}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function toggleDetail(id){document.getElementById('detail-'+CSS.escape(id))?.classList.toggle('open')}
+let editingTx=null;
+function openTx(id,type){currentTxCustomer=id;currentTxType=type;editingTx=null;document.getElementById('txTitle').textContent=type==='charge'?'إضافة دين':'تسجيل دفعة';document.getElementById('txAmount').value='';document.getElementById('txDate').value=dateToday();document.getElementById('txDesc').value='';document.getElementById('txNotes').value='';document.getElementById('txModal').classList.add('show')}
+function editTransaction(cid,tid){const c=db.customers.find(x=>x.id===cid);const t=c?.transactions.find(x=>x.id===tid);if(!t)return;currentTxCustomer=cid;currentTxType=t.type;editingTx=tid;document.getElementById('txTitle').textContent='تعديل العملية';document.getElementById('txAmount').value=t.amount;document.getElementById('txDate').value=t.date||dateToday();document.getElementById('txDesc').value=t.description||'';document.getElementById('txNotes').value=t.notes||'';document.getElementById('txModal').classList.add('show')}
+function closeTxModal(){document.getElementById('txModal').classList.remove('show')}
+function saveTransaction(){const amount=Number(document.getElementById('txAmount').value);if(!Number.isFinite(amount)||amount<=0){alert('أدخل مبلغًا صحيحًا أكبر من صفر');return}const date=document.getElementById('txDate').value||dateToday(),description=document.getElementById('txDesc').value.trim(),notes=document.getElementById('txNotes').value.trim();const c=db.customers.find(x=>x.id===currentTxCustomer);if(!c)return;c.transactions=c.transactions||[];if(editingTx){const t=c.transactions.find(x=>x.id===editingTx);if(t){t.amount=amount;t.date=date;t.description=description;t.notes=notes}}else {const newTx={id:uid(),type:currentTxType,amount,date,description,notes};c.transactions.push(newTx);if(currentTxType==='payment'){db.marketTransactions=db.marketTransactions||[];db.marketTransactions.push({id:uid(),direction:'income',category:'تسديد ديون الزبائن',amount,date,description:description||('تسديد دين - '+c.name),customerId:c.id,linkedCustomerTxId:newTx.id,notes});}}
+if(editingTx&&currentTxType==='payment'){const linked=(db.marketTransactions||[]).find(m=>m.linkedCustomerTxId===editingTx);if(linked){linked.amount=amount;linked.date=date;linked.description=description||('تسديد دين - '+c.name);linked.notes=notes;}}
+closeTxModal();save();if(document.getElementById('marketPage').style.display==='block')renderMarket()}
+function deleteTransaction(cid,tid){const c=db.customers.find(x=>x.id===cid);if(!c||!confirm('حذف هذه العملية؟'))return;const removed=c.transactions.find(t=>t.id===tid);c.transactions=c.transactions.filter(t=>t.id!==tid);if(removed?.type==='payment')db.marketTransactions=(db.marketTransactions||[]).filter(m=>m.linkedCustomerTxId!==tid);save()}
+function exportBackup(){const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});download(blob,'market-debts-backup-'+dateToday()+'.json')}
+function download(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function importBackup(e){const f=e.target.files?.[0];if(!f)return;const reader=new FileReader();reader.onload=()=>{try{const parsed=JSON.parse(reader.result);if(!parsed||!Array.isArray(parsed.customers))throw Error('invalid');if(confirm('استبدال البيانات الحالية بالنسخة المختارة؟')){db=parsed;save();alert('تم استرجاع النسخة')}}catch(err){alert('ملف النسخة الاحتياطية غير صالح')}e.target.value=''};reader.readAsText(f)}
+function exportCSV(){let rows=[['اسم الزبون','الهاتف','تاريخ العملية','النوع','المبلغ','البيان','ملاحظات','الرصيد الحالي']];db.customers.forEach(c=>(c.transactions||[]).forEach(t=>rows.push([c.name,c.phone||'',t.date||'',t.type==='charge'?'دين':'دفعة',t.amount,t.description||'',t.notes||'',balance(c)])));const csv='\ufeff'+rows.map(r=>r.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\n');download(new Blob([csv],{type:'text/csv;charset=utf-8'}),'market-debts-'+dateToday()+'.csv')}
+
+const MARKET_NAME_KEY='market_debts_shop_name_v1';const MARKET_NAME_VIS_KEY='market_debts_shop_name_visible_v1';let marketNameVisible=true;localStorage.setItem(merchantScopedKey(MARKET_NAME_VIS_KEY),'true');
+function toggleMarketNameVisibility(){marketNameVisible=!marketNameVisible;localStorage.setItem(merchantScopedKey(MARKET_NAME_VIS_KEY),String(marketNameVisible));renderMarketBrand()}
+function openBrandEditor(){const modal=document.getElementById('brandEditModal'),input=document.getElementById('brandNameInput');input.value=localStorage.getItem(merchantScopedKey(MARKET_NAME_KEY))||'';modal.classList.add('show');setTimeout(()=>input.focus(),80)}
+function closeBrandEditor(){document.getElementById('brandEditModal').classList.remove('show')}
+function saveMarketName(){const input=document.getElementById('brandNameInput'),trimmed=input.value.trim();if(!trimmed){alert('اكتب اسم السوبر ماركت أولاً.');input.focus();return}localStorage.setItem(merchantScopedKey(MARKET_NAME_KEY),trimmed);marketNameVisible=true;localStorage.setItem(merchantScopedKey(MARKET_NAME_VIS_KEY),'true');renderMarketBrand();closeBrandEditor();}
+function setMarketName(){openBrandEditor()}
+function renderMarketBrand(){const name=localStorage.getItem(merchantScopedKey(MARKET_NAME_KEY))||'دفتر ديون الماركت';const el=document.getElementById('marketBrand');if(el){el.textContent='✨ '+name+' ✨';el.classList.remove('brand-hidden');el.style.display='block';el.style.visibility='visible';el.style.opacity='1'}const toggle=document.getElementById('brandVisibility');if(toggle){toggle.textContent=marketNameVisible?'×':'↻';toggle.title=marketNameVisible?'إخفاء اسم الماركت':'إظهار اسم الماركت';toggle.setAttribute('aria-label',toggle.title)}const splashTitle=document.getElementById('splashTitle');if(splashTitle)splashTitle.textContent=name;}
+function updateClock(){const now=new Date();const timeText=now.toLocaleTimeString('ar-PS',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});const dateText=now.toLocaleDateString('ar-PS',{weekday:'long',day:'numeric',month:'long'});const clock=document.getElementById('liveClock');const date=document.getElementById('liveDate');if(clock)clock.textContent=timeText;if(date)date.textContent=dateText;const sc=document.getElementById('splashClock'),sd=document.getElementById('splashDate');if(sc)sc.textContent=timeText;if(sd)sd.textContent=dateText;}
+renderMarketBrand();updateClock();setInterval(updateClock,1000);
+function dismissSplash(){const splash=document.getElementById('splashScreen');if(!splash||splash.classList.contains('hide')||document.getElementById('securityScreen')?.classList.contains('show'))return;splash.classList.add('hide');}
+setTimeout(dismissSplash,2800);
+const splashEl=document.getElementById('splashScreen');if(splashEl){splashEl.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();dismissSplash();}})}
+
+const REPORTS_VIS_KEY='market_management_daily_reports_visible_v1';
+document.getElementById('search').addEventListener('input',render);document.getElementById('sortMode').addEventListener('change',render);document.getElementById('reportDate').value=dateToday();initMerchantApp();
+function renderReport(){const date=document.getElementById('reportDate').value||dateToday();let charges=0,payments=0,txs=[];db.customers.forEach(c=>(c.transactions||[]).forEach(t=>{if(t.date===date){if(t.type==='charge')charges+=Number(t.amount);else payments+=Number(t.amount);txs.push({name:c.name,phone:c.phone||'',type:t.type,amount:Number(t.amount),desc:t.description||'',notes:t.notes||'',date:t.date})}}));txs.sort((a,b)=>a.name.localeCompare(b.name,'ar'));const el=document.getElementById('reportResults');if(!txs.length){el.innerHTML='<div class="empty">لا توجد عمليات مسجلة في هذا التاريخ.</div>';return}el.innerHTML=`<div class="stats" style="margin:12px 0"><div class="stat"><small>إجمالي ديون اليوم</small><strong>${money(charges)}</strong></div><div class="stat"><small>إجمالي دفعات اليوم</small><strong>${money(payments)}</strong></div><div class="stat"><small>صافي اليوم (دين - دفعات)</small><strong>${money(charges-payments)}</strong></div></div><div>${txs.map(t=>`<div class="transaction"><div><b>${esc(t.name)}</b><div class="txdate">${esc(t.date)} · ${esc(t.desc)}${t.notes?' · '+esc(t.notes):''}</div></div><div class="${t.type==='charge'?'charge':'payment'}">${t.type==='charge'?'+':'−'}${money(t.amount)}</div></div>`).join('')}</div>`}
+function printReport(){renderReport();const report=document.getElementById('reportResults').innerHTML;const date=document.getElementById('reportDate').value;const win=window.open('','_blank');if(!win){alert('اسمح بالنوافذ المنبثقة للطباعة');return}win.document.write(`<html dir="rtl"><head><meta charset="utf-8"><title>تقرير يومي ${date}</title><style>body{font-family:Arial;padding:20px}h2{text-align:center}.transaction{display:flex;justify-content:space-between;border-bottom:1px solid #ddd;padding:8px}.charge{color:#b73535}.payment{color:#176b50}.stats{display:flex;gap:10px}.stat{border:1px solid #ddd;padding:10px;flex:1}.stat small{display:block}</style></head><body><h2>تقرير يومي - ${date}</h2>${report}</body></html>`);win.document.close();win.focus();win.print()}
+
+
+// --------- Market cash movement module ---------
+let editingMarketMovementId=null;
+const marketCategories={
+ income:['مبيعات نقدية','دخل إضافي','دخل آخر'],
+ expense:['شراء بضاعة','نقل ومواصلات','كهرباء ومياه','أجور عمال','مصاريف تشغيلية','مصاريف طارئة','مصروفات أخرى']
+};
+function hideDailyReports(){localStorage.setItem(merchantScopedKey(REPORTS_VIS_KEY),'false');document.body.classList.add('reports-hidden');document.getElementById('reportsPanel').style.display='none';if(document.getElementById('navReports'))document.getElementById('navReports').classList.remove('active');}
+function showDailyReports(){localStorage.setItem(merchantScopedKey(REPORTS_VIS_KEY),'true');document.body.classList.remove('reports-hidden');showAppSection('reports');}
+function showAppSection(section){
+ const customers=document.getElementById('customersPanel'),stats=document.querySelector('.stats'),reports=document.getElementById('reportsPanel'),backup=document.getElementById('backupPanel'),market=document.getElementById('marketPage'),inventory=document.getElementById('inventoryPage'),guide=document.getElementById('guidePanel');
+ if(section!=='debts'&&selectedCustomerId!==null){selectedCustomerId=null;renderCustomerPage();}
+ customers.style.display=section==='debts'?'':'none';
+ stats.style.display=section==='debts'?'':'none';
+ if(section==='reports'){localStorage.setItem(merchantScopedKey(REPORTS_VIS_KEY),'true');document.body.classList.remove('reports-hidden');}
+ reports.style.display=section==='reports'?'':'none';
+ backup.style.display=section==='backup'?'':'none';
+ market.style.display=section==='market'?'block':'none';
+ inventory.style.display=section==='inventory'?'block':'none';
+ guide.style.display=section==='guide'?'block':'none';
+ ['Debts','Market','Inventory','Reports','Backup','Guide'].forEach(x=>{const b=document.getElementById('nav'+x);if(b)b.classList.toggle('active',x.toLowerCase()===section)});
+ if(section==='market')renderMarket();
+ if(section==='inventory')renderInventory();
+ if(section==='debts')render();
+}
+function toggleSideMenu(open){const menu=document.getElementById('sideMenu'),shade=document.getElementById('sideShade');if(!menu||!shade)return;menu.classList.toggle('open',!!open);shade.classList.toggle('open',!!open);document.body.style.overflow=open?'hidden':'';}
+function menuGo(section){toggleSideMenu(false);showAppSection(section);window.scrollTo({top:0,behavior:'smooth'});}
+const THEME_KEY='market_management_theme_v1';
+function applyTheme(){const dark=localStorage.getItem(THEME_KEY)==='dark';document.body.classList.toggle('dark-mode',dark);const b=document.getElementById('themeToggle');if(b)b.textContent=dark?'☀️ الوضع النهاري':'🌙 الوضع الليلي';}
+function toggleTheme(){localStorage.setItem(THEME_KEY,document.body.classList.contains('dark-mode')?'light':'dark');applyTheme();}
+applyTheme();
+
+// --------- Inventory / products module ---------
+let editingProductId=null,currentRestockProductId=null;
+function ensureProducts(){if(!Array.isArray(db.products))db.products=[];}
+function openProductModal(id=null){ensureProducts();editingProductId=id;const p=id?db.products.find(x=>x.id===id):null;document.getElementById('productModalTitle').textContent=p?'تعديل بيانات الصنف':'إضافة صنف جديد';document.getElementById('productName').value=p?.name||'';document.getElementById('productCode').value=p?.code||'';document.getElementById('productBuy').value=p?.buyPrice??'';document.getElementById('productSell').value=p?.sellPrice??'';document.getElementById('productQty').value=p?.qty??0;document.getElementById('productMin').value=p?.minQty??3;document.getElementById('productQty').disabled=!!p;document.getElementById('productModal').classList.add('show');}
+function closeProductModal(){document.getElementById('productModal').classList.remove('show');editingProductId=null;document.getElementById('productQty').disabled=false;}
+function saveProduct(){ensureProducts();const name=document.getElementById('productName').value.trim(),code=document.getElementById('productCode').value.trim(),buy=Number(document.getElementById('productBuy').value),sell=Number(document.getElementById('productSell').value),qty=Number(document.getElementById('productQty').value),min=Number(document.getElementById('productMin').value);if(!name){alert('اكتب اسم الصنف');return}if(document.getElementById('productBuy').value===''||document.getElementById('productSell').value===''||!Number.isFinite(buy)||!Number.isFinite(sell)||buy<0||sell<0){alert('أدخل أسعارًا صحيحة للصنف');return}if(!editingProductId&&(!Number.isInteger(qty)||qty<0)){alert('أدخل كمية صحيحة');return}if(!Number.isInteger(min)||min<0){alert('أدخل حد تنبيه صحيح');return}if(code&&db.products.some(x=>x.code===code&&x.id!==editingProductId)){alert('هذا الباركود أو الكود مستخدم لصنف آخر');return}if(editingProductId){const p=db.products.find(x=>x.id===editingProductId);if(p){p.name=name;p.code=code;p.buyPrice=buy;p.sellPrice=sell;p.minQty=min;}}else db.products.push({id:uid(),name,code,buyPrice:buy,sellPrice:sell,qty,minQty:min,createdAt:dateToday()});closeProductModal();save();renderInventory();}
+function openRestock(id){ensureProducts();const p=db.products.find(x=>x.id===id);if(!p)return;currentRestockProductId=id;document.getElementById('restockTitle').textContent='توريد: '+p.name;document.getElementById('restockCurrent').textContent='الكمية الحالية: '+p.qty+' | سعر الشراء المسجل للوحدة: '+money(p.buyPrice)+' ₪';document.getElementById('restockQty').value='';document.getElementById('restockCost').value='';document.getElementById('restockDate').value=dateToday();document.getElementById('restockNote').value='';document.getElementById('restockModal').classList.add('show');}
+function closeRestockModal(){document.getElementById('restockModal').classList.remove('show');currentRestockProductId=null;}
+function saveRestock(){ensureProducts();const p=db.products.find(x=>x.id===currentRestockProductId);if(!p)return;const qty=Number(document.getElementById('restockQty').value),costRaw=document.getElementById('restockCost').value,cost=Number(costRaw),date=document.getElementById('restockDate').value||dateToday(),note=document.getElementById('restockNote').value.trim();if(!Number.isInteger(qty)||qty<=0){alert('أدخل كمية صحيحة أكبر من صفر');return}if(costRaw!==''&&(!Number.isFinite(cost)||cost<=0)){alert('أدخل تكلفة إجمالية صحيحة أو اترك الحقل فارغًا');return}p.qty=Number(p.qty||0)+qty;if(costRaw!==''){db.marketTransactions=db.marketTransactions||[];db.marketTransactions.push({id:uid(),direction:'expense',category:'شراء بضاعة',amount:cost,date,description:'توريد '+p.name+' - '+qty+' وحدة'+(note?' ('+note+')':''),notes:'مصروف تم إنشاؤه تلقائيًا من قسم المخزون'});p.lastPurchaseCost=cost/qty;}closeRestockModal();save();renderInventory();if(document.getElementById('marketPage').style.display==='block')renderMarket();alert('تم تحديث كمية الصنف'+(costRaw!==''?' وتسجيل تكلفة التوريد في حركة الماركت':''));}
+function deleteProduct(id){ensureProducts();const p=db.products.find(x=>x.id===id);if(!p)return;if(!confirm('حذف الصنف «'+p.name+'» من قائمة المخزون؟'))return;db.products=db.products.filter(x=>x.id!==id);save();renderInventory();}
+function renderInventory(){ensureProducts();const q=(document.getElementById('inventorySearch')?.value||'').trim().toLowerCase(),filter=document.getElementById('inventoryFilter')?.value||'all',all=db.products;const low=all.filter(p=>Number(p.qty||0)<=Number(p.minQty||0));document.getElementById('inventoryCount').textContent=all.length;document.getElementById('inventoryCost').textContent=money(all.reduce((a,p)=>a+Number(p.qty||0)*Number(p.buyPrice||0),0))+' ₪';document.getElementById('inventoryLowCount').textContent=low.length;document.getElementById('inventoryRetailValue').textContent='قيمة البيع: '+money(all.reduce((a,p)=>a+Number(p.qty||0)*Number(p.sellPrice||0),0))+' ₪';const list=all.filter(p=>{const isLow=Number(p.qty||0)<=Number(p.minQty||0),isOut=Number(p.qty||0)<=0;return (!q||(`${p.name||''} ${p.code||''}`).toLowerCase().includes(q))&&(filter==='all'||(filter==='low'&&isLow)||(filter==='out'&&isOut));}).sort((a,b)=>(a.name||'').localeCompare(b.name||'','ar'));const el=document.getElementById('inventoryItems');if(!list.length){el.innerHTML='<div class="empty">لا توجد أصناف مطابقة للبحث.</div>';return}el.innerHTML=list.map(p=>{const qty=Number(p.qty||0),isOut=qty<=0,isLow=!isOut&&qty<=Number(p.minQty||0),badge=isOut?'<span class="stock-badge out">نافد</span>':isLow?'<span class="stock-badge low">كمية منخفضة</span>':'<span class="stock-badge">متوفر</span>';return `<div class="inventory-item"><div class="inventory-item-top"><div><div class="inventory-item-name">${esc(p.name)}</div><div class="inventory-item-meta">${p.code?'الكود: '+esc(p.code)+' · ':''} ${badge}</div></div><strong>${qty} وحدة</strong></div><div class="inventory-item-stats"><div>سعر الشراء<strong>${money(p.buyPrice)} ₪</strong></div><div>سعر البيع<strong>${money(p.sellPrice)} ₪</strong></div><div>قيمة الكمية بالتكلفة<strong>${money(qty*Number(p.buyPrice||0))} ₪</strong></div></div><div class="inventory-item-tools"><button onclick="openRestock('${esc(p.id)}')">📥 توريد كمية</button><button onclick="openProductModal('${esc(p.id)}')">✏️ تعديل</button><button onclick="deleteProduct('${esc(p.id)}')">🗑️ حذف</button></div></div>`}).join('');}
+function printInventory(){ensureProducts();const rows=db.products.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.code||'-')}</td><td>${Number(p.qty||0)}</td><td>${money(p.buyPrice)} ₪</td><td>${money(p.sellPrice)} ₪</td><td>${money(Number(p.qty||0)*Number(p.buyPrice||0))} ₪</td></tr>`).join('');const win=window.open('','_blank');if(!win){alert('اسمح بالنوافذ المنبثقة للطباعة');return}win.document.write(`<html lang="ar" dir="rtl"><meta charset="utf-8"><title>كشف المخزون</title><style>body{font-family:Tahoma,Arial;padding:24px;color:#243b34}h2{text-align:center;color:#176b50}table{width:100%;border-collapse:collapse;margin-top:20px}td,th{border:1px solid #ccd8d2;padding:9px;text-align:right}th{background:#e8f3ed}</style><h2>كشف مخزون الماركت</h2><p>تاريخ الطباعة: ${dateToday()}</p><table><thead><tr><th>الصنف</th><th>الكود</th><th>الكمية</th><th>سعر الشراء</th><th>سعر البيع</th><th>القيمة بالتكلفة</th></tr></thead><tbody>${rows}</tbody></table><script>window.onload=()=>window.print();<\/script></html>`);win.document.close();}
+
+function marketDateToday(){return dateToday()}
+function marketTypeLabel(m){return m.direction==='expense'?'مصروف':'دخل'}
+function marketCategoryOptions(type,selected=''){
+ const list=type==='expense'?marketCategories.expense:marketCategories.income;
+ return list.map(x=>`<option ${x===selected?'selected':''}>${esc(x)}</option>`).join('');
+}
+function openMarketMovement(type='income',id=null){
+ editingMarketMovementId=id;
+ const m=id?(db.marketTransactions||[]).find(x=>x.id===id):null;
+ const actualType=m?(m.linkedCustomerTxId?'debt_payment':m.direction):type;
+ document.getElementById('marketModalTitle').textContent=m?'تعديل حركة':actualType==='expense'?'تسجيل مصروف':actualType==='debt_payment'?'تسجيل تسديد دين':'تسجيل دخل';
+ document.getElementById('marketType').value=actualType;
+ document.getElementById('marketAmount').value=m?.amount||'';
+ document.getElementById('marketDate').value=m?.date||marketDateToday();
+ document.getElementById('marketDescription').value=m?.description||'';
+ const customerSelect=document.getElementById('marketCustomer');
+ customerSelect.innerHTML=(db.customers||[]).map(c=>`<option value="${esc(c.id)}">${esc(c.name)} — المتبقي ${money(balance(c))}</option>`).join('');
+ if(m?.customerId)customerSelect.value=m.customerId;
+ customerSelect.disabled=!!(m?.linkedCustomerTxId);
+ updateMarketModalFields(m?.category||'');
+ document.getElementById('marketModal').classList.add('show');
+}
+function updateMarketModalFields(selected=''){
+ const type=document.getElementById('marketType').value;
+ const customerField=document.getElementById('marketCustomerField'),categoryField=document.getElementById('marketCategoryField'),hint=document.getElementById('marketPaymentHint');
+ customerField.classList.toggle('hidden',type!=='debt_payment');
+ categoryField.classList.toggle('hidden',type==='debt_payment');
+ hint.classList.toggle('hidden',type!=='debt_payment');
+ document.getElementById('marketCategory').innerHTML=marketCategoryOptions(type,selected);
+}
+function closeMarketModal(){document.getElementById('marketModal').classList.remove('show');editingMarketMovementId=null}
+function saveMarketMovement(){
+ const type=document.getElementById('marketType').value,amount=Number(document.getElementById('marketAmount').value),date=document.getElementById('marketDate').value||marketDateToday(),description=document.getElementById('marketDescription').value.trim();
+ if(!Number.isFinite(amount)||amount<=0){alert('أدخل مبلغًا صحيحًا أكبر من صفر');return}
+ db.marketTransactions=db.marketTransactions||[];
+ if(type==='debt_payment'){
+   const cid=document.getElementById('marketCustomer').value,c=db.customers.find(x=>x.id===cid);
+   if(!c){alert('أضف زبونًا أولًا لتسجيل تسديد الدين');return}
+   if(editingMarketMovementId){
+     const m=db.marketTransactions.find(x=>x.id===editingMarketMovementId);
+     if(m?.linkedCustomerTxId){const tx=c.transactions?.find(t=>t.id===m.linkedCustomerTxId);if(tx){tx.amount=amount;tx.date=date;tx.description=description||'تسديد دفعة';tx.notes='';m.amount=amount;m.date=date;m.description=description||('تسديد دين - '+c.name);m.customerId=cid;}}
+     else {alert('لا يمكن تحويل حركة قديمة إلى تسديد دين أثناء التعديل. ألغِها وسجّل تسديدًا جديدًا.');return}
+   }else{
+     const tx={id:uid(),type:'payment',amount,date,description:description||'تسديد دفعة',notes:''};c.transactions=c.transactions||[];c.transactions.push(tx);
+     db.marketTransactions=db.marketTransactions||[];db.marketTransactions.push({id:uid(),direction:'income',category:'تسديد ديون الزبائن',amount,date,description:description||('تسديد دين - '+c.name),customerId:cid,linkedCustomerTxId:tx.id,notes:''});
+   }
+ }else{
+   const category=document.getElementById('marketCategory').value;
+   if(editingMarketMovementId){const m=db.marketTransactions.find(x=>x.id===editingMarketMovementId);if(!m)return;m.direction=type;m.category=category;m.amount=amount;m.date=date;m.description=description;m.notes=m.notes||'';}
+   else db.marketTransactions.push({id:uid(),direction:type,category,amount,date,description,notes:''});
+ }
+ closeMarketModal();save();renderMarket();
+}
+function deleteMarketMovement(id){
+ const m=(db.marketTransactions||[]).find(x=>x.id===id);if(!m)return;
+ if(!confirm('حذف هذه الحركة؟'+(m.linkedCustomerTxId?' سيتم حذف الدفعة المرتبطة بها من حساب الزبون أيضًا.':'')))return;
+ if(m.linkedCustomerTxId){const c=db.customers.find(x=>x.id===m.customerId);if(c)c.transactions=(c.transactions||[]).filter(t=>t.id!==m.linkedCustomerTxId);}
+ db.marketTransactions=db.marketTransactions.filter(x=>x.id!==id);save();renderMarket();
+}
+function marketPeriodStart(period){
+ const d=new Date();d.setHours(0,0,0,0);
+ if(period==='week')d.setDate(d.getDate()-6);
+ if(period==='month')d.setDate(1);
+ return d.toISOString().slice(0,10);
+}
+function renderMarket(){
+ const all=db.marketTransactions||[],period=document.getElementById('marketPeriod')?.value||'today',start=period==='all'?'0000-01-01':marketPeriodStart(period),today=marketDateToday();
+ const inPeriod=all.filter(m=>m.date>=start&&m.date<=today);
+ const sum=(arr,dir)=>arr.filter(m=>m.direction===dir).reduce((a,m)=>a+Number(m.amount||0),0);
+ const income=sum(inPeriod,'income'),expense=sum(inPeriod,'expense');
+ document.getElementById('marketIncomeTotal').textContent=money(income)+' ₪';
+ document.getElementById('marketExpenseTotal').textContent=money(expense)+' ₪';
+ document.getElementById('marketNetTotal').textContent=money(income-expense)+' ₪';
+ document.getElementById('periodIncome').textContent=money(income)+' ₪';
+ document.getElementById('periodExpense').textContent=money(expense)+' ₪';
+ document.getElementById('periodStock').textContent=money(inPeriod.filter(m=>m.direction==='expense'&&m.category==='شراء بضاعة').reduce((a,m)=>a+Number(m.amount),0))+' ₪';
+ document.getElementById('periodOperating').textContent=money(inPeriod.filter(m=>m.direction==='expense'&&m.category!=='شراء بضاعة').reduce((a,m)=>a+Number(m.amount),0))+' ₪';
+ const from=document.getElementById('marketFrom').value,to=document.getElementById('marketTo').value,q=(document.getElementById('marketSearch').value||'').trim().toLowerCase();
+ const list=all.filter(m=>(!from||m.date>=from)&&(!to||m.date<=to)&&(`${m.category||''} ${m.description||''} ${m.date||''} ${m.amount||''}`).toLowerCase().includes(q)).sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+ const el=document.getElementById('marketEntries');
+ if(!list.length){el.innerHTML='<div class="empty">لا توجد حركات مطابقة. ابدأ بتسجيل أول دخل أو مصروف.</div>';return}
+ el.innerHTML=list.map(m=>`<div class="market-entry ${m.direction==='expense'?'expense':'income'}"><div class="entry-main"><div class="entry-title">${esc(m.description||m.category||marketTypeLabel(m))}</div><div class="entry-meta"><span class="category-pill">${esc(m.category||'تسديد ديون الزبائن')}</span> · ${esc(m.date||'')}</div>${m.customerId?`<div class="entry-meta">الزبون: ${esc(db.customers.find(c=>c.id===m.customerId)?.name||'زبون محذوف')}</div>`:''}<div class="entry-tools"><button onclick="openMarketMovement('${m.direction}','${esc(m.id)}')">✏️ تعديل</button><button onclick="deleteMarketMovement('${esc(m.id)}')">🗑️ حذف</button></div></div><div class="entry-amount">${m.direction==='expense'?'−':'+'}${money(m.amount)} ₪</div></div>`).join('');
+}
+function printMarketStatement(){
+ const from=document.getElementById('marketFrom').value,to=document.getElementById('marketTo').value;
+ const list=(db.marketTransactions||[]).filter(m=>(!from||m.date>=from)&&(!to||m.date<=to)).sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+ const inc=list.filter(m=>m.direction==='income').reduce((a,m)=>a+Number(m.amount),0),out=list.filter(m=>m.direction==='expense').reduce((a,m)=>a+Number(m.amount),0);
+ const rows=list.map(m=>`<tr><td>${esc(m.date||'')}</td><td>${esc(m.direction==='expense'?'مصروف':'دخل')}</td><td>${esc(m.category||'تسديد دين')}</td><td>${esc(m.description||'')}</td><td>${money(m.amount)} ₪</td></tr>`).join('');
+ const win=window.open('','_blank');if(!win){alert('اسمح بالنوافذ المنبثقة لطباعة الكشف');return}
+ win.document.write(`<html lang="ar" dir="rtl"><meta charset="utf-8"><title>كشف حركة الماركت</title><style>body{font-family:Tahoma,Arial;padding:24px;color:#243b34}h2{text-align:center;color:#176b50}table{width:100%;border-collapse:collapse;margin-top:20px}td,th{border:1px solid #ccd8d2;padding:9px;text-align:right}th{background:#e8f3ed}.totals{display:flex;gap:12px;margin-top:16px}.totals div{padding:12px;border:1px solid #ccd8d2;border-radius:9px;flex:1}</style><h2>كشف حركة الماركت</h2><p>الفترة: ${from||'البداية'} إلى ${to||'اليوم'}</p><div class="totals"><div>الدخل: <b>${money(inc)} ₪</b></div><div>المصروفات: <b>${money(out)} ₪</b></div><div>الصافي: <b>${money(inc-out)} ₪</b></div></div><table><thead><tr><th>التاريخ</th><th>النوع</th><th>التصنيف</th><th>البيان</th><th>المبلغ</th></tr></thead><tbody>${rows}</tbody></table><script>window.onload=()=>window.print();<\/script></html>`);
+ win.document.close();
+}
+
+
+// --------- QR camera scanner (reads QR only; no wallet charge without provider API) ---------
+let qrCameraStream=null,qrScanActive=false,qrScanTimer=null,qrLastValue='';
+function openQrPaymentScanner(){toggleSideMenu(false);document.getElementById('qrPaymentModal').classList.add('show');document.getElementById('qrPaymentAmount').focus();}
+function closeQrPaymentScanner(){stopQrCamera();document.getElementById('qrPaymentModal').classList.remove('show');}
+async function startQrCamera(){
+ const amount=Number(document.getElementById('qrPaymentAmount').value);
+ const hint=document.getElementById('qrCameraHint'),video=document.getElementById('qrPaymentVideo'),result=document.getElementById('qrScanResult');
+ if(!Number.isFinite(amount)||amount<=0){alert('اكتب مبلغًا صحيحًا أكبر من صفر أولًا.');document.getElementById('qrPaymentAmount').focus();return;}
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+  hint.textContent=window.isSecureContext===false?'الكاميرا محجوبة لأن البرنامج مفتوح من ملف أو اتصال غير آمن. افتحه من رابط HTTPS.':'هذا المتصفح لا يتيح الوصول للكاميرا. افتح البرنامج في Chrome أو متصفح حديث.';
+  result.textContent='تعذر طلب إذن الكاميرا من المتصفح.';return;
+ }
+ const allowCamera=window.confirm('هل تسمح لهذا البرنامج باستخدام الكاميرا؟\nسنستخدم الكاميرا الخلفية لمسح رمز QR فقط. لن نلتقط صورًا أو نسجل فيديو.');
+ if(!allowCamera){hint.textContent='لم تسمح باستخدام الكاميرا. اضغط «فتح الكاميرا» للمحاولة مرة أخرى.';return;}
+ stopQrCamera();hint.textContent='جارٍ طلب إذن الكاميرا من المتصفح…';result.textContent='بانتظار تشغيل الكاميرا…';
+ try{
+  qrCameraStream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}}});
+  video.setAttribute('playsinline','');video.muted=true;video.autoplay=true;video.srcObject=qrCameraStream;video.style.display='block';
+  await video.play();
+  hint.textContent='الكاميرا تعمل. وجّهها إلى رمز QR الخاص بالزبون.';
+  if(!('BarcodeDetector' in window)){
+   result.textContent='الكاميرا تعمل، لكن هذا المتصفح لا يحتوي على قارئ QR مدمج. افتح البرنامج في Google Chrome محدّث أو نضيف قارئ QR متوافقًا.';
+   return;
+  }
+  const detector=new BarcodeDetector({formats:['qr_code']});qrScanActive=true;qrLastValue='';
+  const scan=async()=>{
+   if(!qrScanActive)return;
+   try{
+    if(video.readyState>=2){const codes=await detector.detect(video);if(codes&&codes.length){const raw=String(codes[0].rawValue||'');if(raw&&raw!==qrLastValue){qrLastValue=raw;result.innerHTML='<b>تمت قراءة رمز QR بنجاح.</b><br>المبلغ المطلوب: '+amount.toFixed(2)+' ₪<br><b>محتوى الرمز:</b><br><span></span><br><b style="color:#9a6412">الحالة: الرمز مقروء فقط — لم يتم تنفيذ دفع.</b>';result.querySelector('span').textContent=raw;hint.textContent='تمت القراءة. أوقف الكاميرا عند الانتهاء.';stopQrCamera();return;}}}
+   }catch(e){result.textContent='الكاميرا تعمل، لكن تعذرت قراءة الرمز. قرّب الرمز وثبّته أمام الكاميرا.';}
+   if(qrScanActive)qrScanTimer=setTimeout(scan,350);
+  };scan();
+ }catch(e){
+  stopQrCamera();
+  if(e&&e.name==='NotAllowedError')hint.textContent='تم رفض إذن الكاميرا. اضغط على رمز القفل بجانب عنوان الموقع ثم غيّر إذن الكاميرا إلى سماح.';
+  else if(e&&e.name==='NotFoundError')hint.textContent='لم يتم العثور على كاميرا في هذا الجهاز.';
+  else if(e&&e.name==='NotReadableError')hint.textContent='الكاميرا مستخدمة من تطبيق آخر. أغلق تطبيق الكاميرا أو مكالمة الفيديو ثم حاول.';
+  else if(e&&e.name==='SecurityError')hint.textContent='المتصفح منع الكاميرا لأسباب أمنية. افتح البرنامج عبر رابط HTTPS.';
+  else hint.textContent='تعذر تشغيل الكاميرا ('+(e&&e.name?e.name:'خطأ غير معروف')+'). افتح البرنامج عبر HTTPS واسمح بإذن الكاميرا.';
+  result.textContent='لم يتم تشغيل الكاميرا. راجع سبب المشكلة الظاهر أعلاه.';
+ }
+}
+function stopQrCamera(){qrScanActive=false;if(qrScanTimer)clearTimeout(qrScanTimer);qrScanTimer=null;if(qrCameraStream){qrCameraStream.getTracks().forEach(t=>t.stop());qrCameraStream=null;}const v=document.getElementById('qrPaymentVideo');if(v){v.pause();v.srcObject=null;v.style.display='none';}}
+
+</script></body></html>
